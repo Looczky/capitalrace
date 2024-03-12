@@ -28,6 +28,7 @@ function Game() {
       setCurrentCapital(chosen_value['capital']);
       const newCountriesLeft = countries.filter((_,index)=>index!==random_value);
       setCountriesLeft(newCountriesLeft);
+      setRemaining(countries.length);
     }
   },[countries])
 
@@ -50,15 +51,10 @@ function Game() {
       setCurrentCountry(chosen_value['name']);
       setCurrentCapital(chosen_value['capital']);
       setCountriesLeft(countriesLeft.filter((_,index)=>index!==random_value));
+      setRemaining(remaining-1);
       setInputValue('');
-      console.log(countriesLeft);
     }
   },[inputValue]);
-
-  function handleClick(){
-    if (remaining >0)
-        setRemaining(remaining - 1);
-  }
 
   function handleInputChange(event){
     setInputValue(event.target.value);
@@ -71,8 +67,11 @@ function Game() {
         <p>{currentCountry}</p>
       )}
       <input onChange={handleInputChange} value={inputValue}></input> <br></br>
-
-      <button onClick={handleClick}>Woosh!</button>
+      {results.map((result, index) => (
+      <div key={index}>
+        <p style={{color:'green'}}>{result}</p>
+      </div>
+    ))}
     </div>
   );
 }
