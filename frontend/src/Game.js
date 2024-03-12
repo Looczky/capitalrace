@@ -4,7 +4,11 @@ import axios from 'axios';
 function Game() {
   const [remaining, setRemaining] = useState(10);
   const [countries, setCountries] = useState([]);
+  const [countriesLeft, setCountriesLeft] = useState([]);
   const [inputValue, setInputValue] = useState('');
+  const [results, setResults] = useState([]);
+  const [currentCountry, setCurrentCountry] = useState('');
+  const [currentCapital, setCurrentCapital] = useState('');
 
   useEffect(() => {
     axios.get('http://localhost:8000/hello-world/')
@@ -17,8 +21,37 @@ function Game() {
 }, []); 
 
   useEffect(()=>{
-    if (inputValue === '123'){
-      console.log('AYYY');
+    if (countries.length > 0){
+      const random_value = Math.round(countries.length * Math.random());
+      const chosen_value = countries[random_value];
+      setCurrentCountry(chosen_value['name']);
+      setCurrentCapital(chosen_value['capital']);
+      const newCountriesLeft = countries.filter((_,index)=>index!==random_value);
+      setCountriesLeft(newCountriesLeft);
+    }
+  },[countries])
+
+  useEffect(()=>{
+    if (results.length!==0){
+      
+      console.log('hey i need to change!',results,results.length);
+      }
+  },[results])
+
+  useEffect(()=>{
+    if (inputValue === '')
+      return;
+    if (inputValue.toLowerCase() === currentCapital.toLowerCase()){
+      const newResults = [...results, currentCountry]
+      setResults(newResults);
+
+      const random_value = Math.round(countries.length * Math.random());
+      const chosen_value = countriesLeft[random_value];
+      setCurrentCountry(chosen_value['name']);
+      setCurrentCapital(chosen_value['capital']);
+      setCountriesLeft(countriesLeft.filter((_,index)=>index!==random_value));
+      setInputValue('');
+      console.log(countriesLeft);
     }
   },[inputValue]);
 
@@ -35,7 +68,7 @@ function Game() {
     <div>
       <h2>Remaining: {remaining}</h2>
       {countries.length > 0 && (
-        <p>{countries[0]['name']}</p>
+        <p>{currentCountry}</p>
       )}
       <input onChange={handleInputChange} value={inputValue}></input> <br></br>
 
