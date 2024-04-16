@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Stopwatch from './Stopwatch';
 
 function Game() {
   const [remaining, setRemaining] = useState(10);
@@ -9,6 +10,24 @@ function Game() {
   const [results, setResults] = useState([]);
   const [currentCountry, setCurrentCountry] = useState('');
   const [currentCapital, setCurrentCapital] = useState('');
+  const [pauseTimer,setPauseTimer] = useState(true);
+  
+  function handleInputChange(event){
+    setInputValue(event.target.value);
+  }
+
+  function updateCorrect(){
+    const newResults = [...results, currentCountry]
+    setResults(newResults);
+    
+    const random_value = Math.round(countries.length * Math.random());
+    const chosen_value = countriesLeft[random_value];
+    setCurrentCountry(chosen_value['name']);
+    setCurrentCapital(chosen_value['capital']);
+    setCountriesLeft(countriesLeft.filter((_,index)=>index!==random_value));
+    setRemaining(remaining-1);
+    setInputValue('');
+  }
 
   useEffect(() => {
     axios.get('http://localhost:8000/hello-world/')
@@ -43,25 +62,16 @@ function Game() {
     if (inputValue === '')
       return;
     if (inputValue.toLowerCase() === currentCapital.toLowerCase()){
-      const newResults = [...results, currentCountry]
-      setResults(newResults);
+      updateCorrect()
 
-      const random_value = Math.round(countries.length * Math.random());
-      const chosen_value = countriesLeft[random_value];
-      setCurrentCountry(chosen_value['name']);
-      setCurrentCapital(chosen_value['capital']);
-      setCountriesLeft(countriesLeft.filter((_,index)=>index!==random_value));
-      setRemaining(remaining-1);
-      setInputValue('');
+      if (pauseTimer) setPauseTimer(false)
     }
   },[inputValue]);
 
-  function handleInputChange(event){
-    setInputValue(event.target.value);
-  }
 
   return (
     <div>
+      <Stopwatch isPaused={pauseTimer}></Stopwatch>
       <h2>Remaining: {remaining}</h2>
       {countries.length > 0 && (
         <p>{currentCountry}</p>
