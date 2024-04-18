@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Stopwatch from './Stopwatch';
 import shuffle from './utils';
+import MapChart from './MapChart';
+
 
 function Game() {
   const [remaining, setRemaining] = useState(10);
@@ -130,6 +132,10 @@ function Game() {
           <input onChange={handleInputChange} value={inputValue}></input> <br></br>
           <button type="button" class="btn btn-danger">Give up ?</button>
         </div>
+      </div>
+      <div class='row'>
+
+      <MapChart results={results} currentCountry={currentCountry}></MapChart>
       </div>
     <div class='row'>
 
