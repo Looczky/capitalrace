@@ -14,8 +14,10 @@ function Game() {
   const [currentCountry, setCurrentCountry] = useState('');
   const [currentCapital, setCurrentCapital] = useState('');
   const [pauseTimer,setPauseTimer] = useState(true);
+  const [resetTimer,setResetTimer] = useState(false);
   const [skipCapital,setSkipCapital] = useState(false);
-  
+  const [gameRunning,setGameRunning] = useState(true);
+
 
   function handleInputChange(event){
     setInputValue(event.target.value);
@@ -45,9 +47,16 @@ function Game() {
     setInputValue('');
   }
 
-  function showResults(){
-    return 0
+  function stopGame(){
+    setGameRunning(false);
   }
+
+  useEffect(()=>{
+    if(!gameRunning){
+      setPauseTimer(true);
+
+    }
+  },[gameRunning])
 
   useEffect(() => {
     axios.get('http://localhost:8000/hello-world/')
@@ -59,11 +68,17 @@ function Game() {
         .catch(error => {
             console.log(error);
         });
+}, []); 
 
+  useEffect(()=>{
     const handleKeyDown = (event) => {
+      if (!gameRunning) return
       if (event.code === 'Space') {
-        event.preventDefault();
-        setSkipCapital(true);
+        const regex = /[a-zA-Z]/g;
+        if (inputValue.match(regex) === null){
+          event.preventDefault();
+          setSkipCapital(true);
+        }
       }
     };
 
@@ -71,7 +86,7 @@ function Game() {
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-}, []); 
+  })
 
   useEffect(()=>{
     if (skipCapital){
@@ -83,21 +98,9 @@ function Game() {
 
   useEffect(()=>{
     if (countries.length > 0){
-      const chosen_value = countries[0];
-      setCurrentCountry(chosen_value['name']);
-      setCurrentCapital(chosen_value['capital']);
-      const newCountriesLeft = countries.filter((_,index)=>index!==0);
-      setCountriesLeft(newCountriesLeft);
-      setRemaining(countries.length);
+      initializeGameSetup()
     }
   },[countries])
-
-  useEffect(()=>{
-    if (results.length!==0){
-      
-      console.log('hey i need to change!',results,results.length);
-      }
-  },[results])
 
   useEffect(()=>{
     if (inputValue === '')
@@ -109,36 +112,67 @@ function Game() {
     }
   },[inputValue]);
 
+  function initializeGameSetup(){
+    const chosen_value = countries[0];
+    setCurrentCountry(chosen_value['name']);
+    setCurrentCapital(chosen_value['capital']);
+    const newCountriesLeft = countries.filter((_,index)=>index!==0);
+    setCountriesLeft(newCountriesLeft);
+    setRemaining(countries.length);
+    setResults([]);
+    setResetTimer(true);
+  }
+
+  function restartProgress(){
+    setGameRunning(true)
+    initializeGameSetup()
+
+  }
+
+  useEffect(()=>{
+    if(resetTimer) setResetTimer(false);
+  },[resetTimer])
 
   return (
     <div>
       <div class='row'>
-        <Stopwatch isPaused={pauseTimer}></Stopwatch>
+        <Stopwatch isPaused={pauseTimer} doReset={resetTimer}></Stopwatch>
       </div>
-      <div class='row'>
-        <div class='d-flex justify-content-center'>
-          <h2>Remaining: {remaining}</h2>
+      { gameRunning?(
+      <div>
+        <div class='row'>
+          <div class='d-flex justify-content-center'>
+            <h2>Remaining: {remaining}</h2>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='d-flex justify-content-center'>
+            {countries.length > 0 && (
+                <p>{currentCountry}</p>
+                )}
+          </div>
+        </div>
+        <div class='row'>
+          <div class='d-flex justify-content-center'>
+            <input onChange={handleInputChange} value={inputValue}></input> <br></br>
+            <button type="button" class="btn btn-danger" onClick={stopGame}>Give up ?</button>
+          </div>
         </div>
       </div>
-      <div class='row'>
-        <div class='d-flex justify-content-center'>
-          {countries.length > 0 && (
-              <p>{currentCountry}</p>
-              )}
+      ) : (
+        <div>
+          <div class='row'>
+            <div class='d-flex justify-content-center'>
+              <button type="button" class="btn btn-success" onClick={restartProgress}>Play again</button>
+            </div>
+          </div>
         </div>
-      </div>
+      )
+      }
       <div class='row'>
-        <div class='d-flex justify-content-center'>
-          <input onChange={handleInputChange} value={inputValue}></input> <br></br>
-          <button type="button" class="btn btn-danger">Give up ?</button>
-        </div>
-      </div>
-      <div class='row'>
-
-      <MapChart results={results} currentCountry={currentCountry}></MapChart>
+      <MapChart results={results} currentCountry={currentCountry} gameRunning = {gameRunning}></MapChart>
       </div>
     <div class='row'>
-
         {results.map((result, index) => (
           <div key={index}>
           <p style={{color:'green'}}>{result}</p>

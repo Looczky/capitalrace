@@ -1,12 +1,12 @@
 import React from "react";
 import { ComposableMap, Geographies, Geography,ZoomableGroup, Marker } from "react-simple-maps";
 
-const geoUrl = "https://raw.githubusercontent.com/leakyMirror/map-of-europe/master/TopoJSON/europe.topojson";
+// const geoUrl = "https://raw.githubusercontent.com/leakyMirror/map-of-europe/master/TopoJSON/europe.topojson";
+const geoUrl = "/europe.topojson"
 
 const MapChart = (data) =>{
     const handleClick = geo =>()=>{
-        // console.log(results);
-        console.log(data.currentCountry);
+        console.log(data.gameRunning);
     }
 
     if (!data) return
@@ -30,7 +30,7 @@ const MapChart = (data) =>{
                     style={{
                         default: {
                         outline:"none",
-                        fill: data.results.includes(geo.properties.NAME) ? "#98FB98" :  (data.currentCountry == geo.properties.NAME)? "#F5761A" : "#EEE",
+                        fill: data.results.includes(geo.properties.NAME) ? "#98FB98" :  (data.currentCountry == geo.properties.NAME)? "#F5761A" : data.gameRunning ? "#EEE": '#D30000',
                         },
                         hover: {
                         outline:"none",
