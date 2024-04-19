@@ -25,10 +25,6 @@ function Stopwatch({isPaused,doReset}) {
     if (doReset) reset();
   },[doReset])
 
-  function handlePausing(){
-    
-  }
-
   // Time display
   function buildStopWatch(totalSeconds){
     if (totalSeconds < 60){

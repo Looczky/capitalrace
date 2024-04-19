@@ -17,7 +17,7 @@ function Game() {
   const [resetTimer,setResetTimer] = useState(false);
   const [skipCapital,setSkipCapital] = useState(false);
   const [gameRunning,setGameRunning] = useState(true);
-
+  const [inputFocus,setInputFocus] = useState(false);
 
   function handleInputChange(event){
     setInputValue(event.target.value);
@@ -75,7 +75,7 @@ function Game() {
       if (!gameRunning) return
       if (event.code === 'Space') {
         const regex = /[a-zA-Z]/g;
-        if (inputValue.match(regex) === null){
+        if (inputValue.match(regex) === null || !inputFocus){
           event.preventDefault();
           setSkipCapital(true);
         }
@@ -129,6 +129,14 @@ function Game() {
 
   }
 
+  function onInputFocus(){
+    setInputFocus(true);
+  }
+
+  function onInputBlur(){
+    setInputFocus(false);
+  }
+
   useEffect(()=>{
     if(resetTimer) setResetTimer(false);
   },[resetTimer])
@@ -154,7 +162,7 @@ function Game() {
         </div>
         <div class='row'>
           <div class='d-flex justify-content-center'>
-            <input onChange={handleInputChange} value={inputValue}></input> <br></br>
+            <input onChange={handleInputChange} value={inputValue} onFocus={onInputFocus} onBlur={onInputBlur}></input> <br></br>
             <button type="button" class="btn btn-danger" onClick={stopGame}>Give up ?</button>
           </div>
         </div>
