@@ -131,6 +131,10 @@ function Game() {
 
   function onInputFocus(){
     setInputFocus(true);
+    console.log(countries)
+    countries.map((x,y)=>{
+      console.log(x['name']);
+    })
   }
 
   function onInputBlur(){
@@ -181,9 +185,11 @@ function Game() {
       <MapChart results={results} currentCountry={currentCountry} gameRunning = {gameRunning}></MapChart>
       </div>
     <div class='row'>
-        {results.map((result, index) => (
-          <div key={index}>
-          <p style={{color:'green'}}>{result}</p>
+        {countries.map((countrySet, index) => (
+          <div class='col-sm-3' key={index}>
+          <p style={{color: results.includes(countrySet['name'])? 'green': 'red', visibility: results.includes(countrySet['name']) ? 'visible': gameRunning? 'hidden':'visible'}}>
+            {countrySet['name']} {countrySet['capital']}
+          </p>
         </div>
       ))}
       </div>

@@ -6,7 +6,6 @@ const geoUrl = "/europe.topojson"
 
 const MapChart = (data) =>{
     const handleClick = geo =>()=>{
-        console.log(data.gameRunning);
     }
 
     if (!data) return
@@ -14,10 +13,12 @@ const MapChart = (data) =>{
     return(
         <ComposableMap
             projectionConfig={{
-                scale: 600,
+                scale: 900,
                     }}
-            width={800}
+            width={0}
             height={1500}
+            // much better adjusting method than above
+            viewBox="-600 -350 1200 500"
             style={{ width: "75%", height: "auto" }} 
         >
             <Geographies geography={geoUrl}>
