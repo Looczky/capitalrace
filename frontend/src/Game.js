@@ -4,15 +4,16 @@ import Stopwatch from './Stopwatch';
 import shuffle from './utils';
 import MapChart from './MapChart';
 
-
+// TODO:Fix double capital bug if correct guess
 function Game() {
   const [remaining, setRemaining] = useState(10);
   const [countries, setCountries] = useState([]);
-  const [countriesLeft, setCountriesLeft] = useState([]);
+  const [countriesLeft, setCountriesLeft] = useState(null);
   const [inputValue, setInputValue] = useState('');
   const [results, setResults] = useState([]);
   const [currentCountry, setCurrentCountry] = useState('');
   const [currentCapital, setCurrentCapital] = useState('');
+  const [currentIndex,setCurrentIndex] = useState(null);
   const [pauseTimer,setPauseTimer] = useState(true);
   const [resetTimer,setResetTimer] = useState(false);
   const [skipCapital,setSkipCapital] = useState(false);
@@ -24,14 +25,31 @@ function Game() {
   }
 
   function updateCorrect(){
-    const newResults = [...results, currentCountry]
+    const newResults = [...results, currentCountry];
     setResults(newResults);
-    const myIndex = 0;
-    updateCountry(myIndex);
-    setCountriesLeft(countriesLeft.filter((_,index)=>index!== myIndex));
-    setRemaining(remaining-1);
+    const newCountrySet = countriesLeft.filter((_,index)=>index !== currentIndex);
+    setCountriesLeft(newCountrySet);
     setInputValue('');
   }
+
+  function updateToRandomIndex(){
+    
+    const random_index = Math.floor(Math.random()*countriesLeft.length);
+    setCurrentIndex(random_index);
+    updateCountry(random_index)
+  }
+
+  useEffect(()=>{
+    if (countriesLeft === null){
+      return
+    }
+    setRemaining(countriesLeft.length);
+    if (countriesLeft.length>0){
+      updateToRandomIndex();
+    }
+    else{
+    }
+  },[countriesLeft])
 
   function updateCountry(index){
     const chosen_value = countriesLeft[index];
@@ -40,10 +58,7 @@ function Game() {
   }
 
   function handleSkip(){
-    const data = [...countriesLeft];
-    shuffle(data);
-    setCountriesLeft(data);
-    updateCountry(0);
+    updateToRandomIndex();
     setInputValue('');
   }
 
@@ -106,19 +121,14 @@ function Game() {
     if (inputValue === '')
       return;
     if (inputValue.toLowerCase() === currentCapital.toLowerCase()){
-      updateCorrect()
+      updateCorrect();
 
-      if (pauseTimer) setPauseTimer(false)
+      if (pauseTimer) setPauseTimer(false);
     }
   },[inputValue]);
 
   function initializeGameSetup(){
-    const chosen_value = countries[0];
-    setCurrentCountry(chosen_value['name']);
-    setCurrentCapital(chosen_value['capital']);
-    const newCountriesLeft = countries.filter((_,index)=>index!==0);
-    setCountriesLeft(newCountriesLeft);
-    setRemaining(countries.length);
+    setCountriesLeft(countries);
     setResults([]);
     setResetTimer(true);
   }
@@ -131,10 +141,6 @@ function Game() {
 
   function onInputFocus(){
     setInputFocus(true);
-    console.log(countries)
-    countries.map((x,y)=>{
-      console.log(x['name']);
-    })
   }
 
   function onInputBlur(){
