@@ -4,7 +4,6 @@ import Stopwatch from './Stopwatch';
 import shuffle from './utils';
 import MapChart from './MapChart';
 
-// TODO:Fix double capital bug if correct guess
 function Game() {
   const [remaining, setRemaining] = useState(10);
   const [countries, setCountries] = useState([]);
@@ -16,7 +15,6 @@ function Game() {
   const [currentIndex,setCurrentIndex] = useState(null);
   const [pauseTimer,setPauseTimer] = useState(true);
   const [resetTimer,setResetTimer] = useState(false);
-  const [skipCapital,setSkipCapital] = useState(false);
   const [gameRunning,setGameRunning] = useState(true);
   const [inputFocus,setInputFocus] = useState(false);
 
@@ -39,6 +37,22 @@ function Game() {
     updateCountry(random_index)
   }
 
+  
+  function updateCountry(index){
+    const chosen_value = countriesLeft[index];
+    setCurrentCountry(chosen_value['name']);
+    setCurrentCapital(chosen_value['capital']);
+  }
+  
+  function handleSkip(){
+    updateToRandomIndex();
+    setInputValue('');
+  }
+  
+  function stopGame(){
+    setGameRunning(false);
+  }
+
   useEffect(()=>{
     if (countriesLeft === null){
       return
@@ -48,28 +62,13 @@ function Game() {
       updateToRandomIndex();
     }
     else{
+      stopGame();
     }
   },[countriesLeft])
-
-  function updateCountry(index){
-    const chosen_value = countriesLeft[index];
-    setCurrentCountry(chosen_value['name']);
-    setCurrentCapital(chosen_value['capital']);
-  }
-
-  function handleSkip(){
-    updateToRandomIndex();
-    setInputValue('');
-  }
-
-  function stopGame(){
-    setGameRunning(false);
-  }
-
+  
   useEffect(()=>{
     if(!gameRunning){
       setPauseTimer(true);
-
     }
   },[gameRunning])
 
@@ -92,7 +91,7 @@ function Game() {
         const regex = /[a-zA-Z]/g;
         if (inputValue.match(regex) === null || !inputFocus){
           event.preventDefault();
-          setSkipCapital(true);
+          handleSkip()
         }
       }
     };
@@ -102,14 +101,6 @@ function Game() {
       document.removeEventListener('keydown', handleKeyDown);
     };
   })
-
-  useEffect(()=>{
-    if (skipCapital){
-      handleSkip();
-      setSkipCapital(false);
-    }
-  },[skipCapital]);
-
 
   useEffect(()=>{
     if (countries.length > 0){
@@ -136,7 +127,6 @@ function Game() {
   function restartProgress(){
     setGameRunning(true)
     initializeGameSetup()
-
   }
 
   function onInputFocus(){
@@ -153,9 +143,27 @@ function Game() {
 
   return (
     <div>
-      <div class='row'>
-        <Stopwatch isPaused={pauseTimer} doReset={resetTimer}></Stopwatch>
+      {gameRunning? (
+      <div>
+        <div class='row'>
+          <div class='col'>
+            <Stopwatch isPaused={pauseTimer} doReset={resetTimer}></Stopwatch>
+          </div>
+        </div>
       </div>
+      ) : (
+        <div>
+          <div class='row'>
+            <div class='col-md-6'>
+              <Stopwatch isPaused={pauseTimer} doReset={resetTimer}></Stopwatch>
+            </div>
+            <div class='col-md-6'>
+              <p style={{fontSize: '5rem', textAlign:'center'}}>{Math.round(results.length * 100 / countries.length)}%</p>
+            </div>
+          </div>
+        </div>
+      )
+      }
       { gameRunning?(
       <div>
         <div class='row'>
@@ -172,6 +180,7 @@ function Game() {
         </div>
         <div class='row'>
           <div class='d-flex justify-content-center'>
+            <button type="button" class="btn btn-warning" onClick={handleSkip}>Skip</button>
             <input onChange={handleInputChange} value={inputValue} onFocus={onInputFocus} onBlur={onInputBlur}></input> <br></br>
             <button type="button" class="btn btn-danger" onClick={stopGame}>Give up ?</button>
           </div>
