@@ -1,5 +1,5 @@
 import React from 'react';
-import Game from '../Game/Game';
+import Game, { loader as countriesLoader } from '../Game/Game';
 import Results from '../Results/Results';
 import {
   createBrowserRouter,
@@ -12,12 +12,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import ErrorPage from '../../error_pages/error_page';
 
-
 const router = createBrowserRouter([
   {
     path:'/',
     element:<Game/>,
     errorElement: <ErrorPage/>,
+    loader: countriesLoader,
   },
   {
     path:'/results',

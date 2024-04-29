@@ -3,10 +3,11 @@ import axios from 'axios';
 import Stopwatch from './Stopwatch';
 import shuffle from '../../utils/utils';
 import MapChart from './MapChart';
+import {Link, useLoaderData} from 'react-router-dom'
 
 function Game() {
   const [remaining, setRemaining] = useState(10);
-  const [countries, setCountries] = useState([]);
+  const countries = useLoaderData()
   const [countriesLeft, setCountriesLeft] = useState(null);
   const [inputValue, setInputValue] = useState('');
   const [results, setResults] = useState([]);
@@ -30,12 +31,6 @@ function Game() {
     setInputValue('');
   }
 
-  // function updateToRandomIndex(){
-  //   const random_index = Math.floor(Math.random()*countriesLeft.length);
-  //   setCurrentIndex(random_index);
-  //   updateCountry(random_index)
-  // }
-
   function updateToNextIndex(){
     let new_index;
     if (currentIndex < countriesLeft.length -1){
@@ -48,7 +43,6 @@ function Game() {
     updateCountry(new_index);
   }
 
-  
   function updateCountry(index){
     const chosen_value = countriesLeft[index];
     setCurrentCountry(chosen_value['name']);
@@ -56,7 +50,6 @@ function Game() {
   }
   
   function handleSkip(){
-    // updateToRandomIndex();
     updateToNextIndex();
     setInputValue('');
   }
@@ -71,7 +64,6 @@ function Game() {
     }
     setRemaining(countriesLeft.length);
     if (countriesLeft.length>0){
-      // updateToRandomIndex();
       updateToNextIndex();
     }
     else{
@@ -85,17 +77,9 @@ function Game() {
     }
   },[gameRunning])
 
-  useEffect(() => {
-    axios.get('http://localhost:8000/hello-world/')
-        .then(response => {
-          const data = response.data.countries;
-          shuffle(data);
-          setCountries(data);
-        })
-        .catch(error => {
-            console.log(error);
-        });
-}, []); 
+  useEffect(()=>{
+    shuffle(countries);
+  },countries)
 
   useEffect(()=>{
     const handleKeyDown = (event) => {
@@ -204,6 +188,7 @@ function Game() {
           <div class='row'>
             <div class='d-flex justify-content-center'>
               <button type="button" class="btn btn-success" onClick={restartProgress}>Play again</button>
+              <Link to={`Results`}>Check results</Link>
             </div>
           </div>
         </div>
@@ -226,3 +211,15 @@ function Game() {
 }
 
 export default Game;
+
+
+export const loader = async () => {
+  try {
+    const response = await axios.get('http://localhost:8000/hello-world/');
+    const data = response.data.countries;
+    return data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
