@@ -30,11 +30,22 @@ function Game() {
     setInputValue('');
   }
 
-  function updateToRandomIndex(){
-    
-    const random_index = Math.floor(Math.random()*countriesLeft.length);
-    setCurrentIndex(random_index);
-    updateCountry(random_index)
+  // function updateToRandomIndex(){
+  //   const random_index = Math.floor(Math.random()*countriesLeft.length);
+  //   setCurrentIndex(random_index);
+  //   updateCountry(random_index)
+  // }
+
+  function updateToNextIndex(){
+    let new_index;
+    if (currentIndex < countriesLeft.length -1){
+      new_index = currentIndex + 1
+    }
+    else{
+      new_index = 0
+    }
+    setCurrentIndex(new_index);
+    updateCountry(new_index);
   }
 
   
@@ -45,7 +56,8 @@ function Game() {
   }
   
   function handleSkip(){
-    updateToRandomIndex();
+    // updateToRandomIndex();
+    updateToNextIndex();
     setInputValue('');
   }
   
@@ -59,7 +71,8 @@ function Game() {
     }
     setRemaining(countriesLeft.length);
     if (countriesLeft.length>0){
-      updateToRandomIndex();
+      // updateToRandomIndex();
+      updateToNextIndex();
     }
     else{
       stopGame();
