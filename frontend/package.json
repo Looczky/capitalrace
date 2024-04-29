@@ -9,6 +9,7 @@
     "axios": "^1.6.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.23.0",
     "react-scripts": "5.0.1",
     "react-simple-maps": "^3.0.0",
     "react-timer-hook": "^3.0.7",

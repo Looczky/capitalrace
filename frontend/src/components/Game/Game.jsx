@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Stopwatch from './Stopwatch';
-import shuffle from './utils';
+import shuffle from '../../utils/utils';
 import MapChart from './MapChart';
 
 function Game() {
