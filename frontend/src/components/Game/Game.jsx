@@ -1,14 +1,21 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import countries from "../../data/countries.json";
-import shuffle, { isCorrect } from "../../utils/utils";
+import shuffle, {
+  isCorrect,
+  findCountry,
+  isCountryNamePrefix,
+} from "../../utils/utils";
 import Shell from "../App/Shell";
+import ModeSwitch from "../App/ModeSwitch";
 import CountryFlag from "../App/CountryFlag";
 import Icon from "../App/Icon";
 import MapChart from "./MapChart";
 import Stopwatch from "./Stopwatch";
 
-export default function Game() {
+export default function Game({ mode = "capitals" }) {
+  const isCountries = mode === "countries";
+  const unit = isCountries ? "państw" : "stolic";
   const [queue, setQueue] = useState(() => shuffle(countries));
   const [answers, setAnswers] = useState([]);
   const [value, setValue] = useState("");
@@ -17,6 +24,8 @@ export default function Game() {
   const [feedback, setFeedback] = useState(null);
   const [dialog, setDialog] = useState(null);
   const startedAt = useRef(null);
+  const answerTimer = useRef(null);
+  useEffect(() => () => clearTimeout(answerTimer.current), []);
   const input = useRef(null);
   const dialogRef = useRef(null);
   const navigate = useNavigate();
@@ -34,6 +43,7 @@ export default function Game() {
 
   useEffect(() => {
     if (!dialog) return;
+    clearTimeout(answerTimer.current);
     const previous = document.activeElement;
     dialogRef.current.showModal();
     return () => {
@@ -48,7 +58,9 @@ export default function Game() {
   }
 
   function finish(finalAnswers = answers) {
+    clearTimeout(answerTimer.current);
     const result = {
+      mode,
       answers: finalAnswers,
       seconds: startedAt.current
         ? Math.floor((Date.now() - startedAt.current) / 1000)
@@ -56,34 +68,67 @@ export default function Game() {
       date: Date.now(),
     };
     try {
-      sessionStorage.setItem("capitalrace-result", JSON.stringify(result));
+      sessionStorage.setItem(
+        isCountries ? "capitalrace-countries-result" : "capitalrace-result",
+        JSON.stringify(result),
+      );
     } catch {
       /* Results still work when storage is unavailable. */
     }
-    navigate("/results", { state: result });
+    navigate(isCountries ? "/countries/results" : "/results", {
+      state: result,
+    });
   }
 
-  function acceptAnswer() {
-    const next = [...answers, current.name];
+  function acceptAnswer(country = current) {
+    const next = [...answers, country.name];
     setAnswers(next);
     setFeedback({
       correct: true,
-      text: `${current.capital} — dokładnie tak!`,
+      text: isCountries
+        ? `${country.label} — dodano do mapy!`
+        : `${country.capital} — dokładnie tak!`,
     });
     setValue("");
     if (queue.length === 1) {
       finish(next);
       return;
     }
-    setQueue(queue.slice(1));
+    setQueue(queue.filter((item) => item.name !== country.name));
     input.current?.focus();
   }
 
   function handleInputChange(event) {
     const answer = event.target.value;
-    if (status === "playing" && isCorrect(answer, current)) {
-      acceptAnswer();
-      return;
+    clearTimeout(answerTimer.current);
+    if (status === "playing") {
+      if (isCountries) {
+        const country = findCountry(answer);
+        if (country) {
+          const register = () => {
+            if (answers.includes(country.name)) {
+              setFeedback({
+                correct: false,
+                text: `${country.label} jest już na mapie. Wpisz inne państwo.`,
+              });
+              setValue("");
+            } else {
+              acceptAnswer(country);
+            }
+          };
+          if (isCountryNamePrefix(answer, country)) {
+            // Give the player time to finish an alternative name, e.g. Cypr → Cyprus.
+            setValue(answer);
+            answerTimer.current = setTimeout(register, 300);
+          } else {
+            register();
+          }
+          return;
+        }
+      } else if (isCorrect(answer, current)) {
+        acceptAnswer();
+        return;
+      }
     }
     setValue(answer);
     if (feedback?.correct === false) setFeedback(null);
@@ -105,24 +150,32 @@ export default function Game() {
 
   return (
     <Shell immersive onHelp={() => setDialog("help")}>
-      <section className="atlas-stage" aria-label="Gra w stolice Europy">
+      <section
+        className="atlas-stage"
+        aria-label={
+          isCountries ? "Gra w państwa Europy" : "Gra w stolice Europy"
+        }
+      >
         <div className="atlas-canvas">
           <MapChart
             interactive
             results={answers}
-            currentCountry={current.name}
+            currentCountry={isCountries ? undefined : current.name}
+            mode={mode}
           />
         </div>
         <div className="atlas-heading">
-          <p className="eyebrow">
-            <span className="tiny-line" /> EDYCJA EUROPEJSKA
-          </p>
+          <ModeSwitch />
           <h1>
             Cała Europa.
             <br />
             <em>Z pamięci.</em>
           </h1>
-          <p>45 krajów. Tyle miejsc do odkrycia.</p>
+          <p>
+            {isCountries
+              ? "Wpisuj państwa. Wypełnij całą mapę."
+              : "45 krajów. Tyle miejsc do odkrycia."}
+          </p>
         </div>
         <div className="atlas-stats">
           <div>
@@ -146,7 +199,11 @@ export default function Game() {
           <div
             className="atlas-progress"
             role="progressbar"
-            aria-label="Postęp odgadywania stolic"
+            aria-label={
+              isCountries
+                ? "Postęp odgadywania państw"
+                : "Postęp odgadywania stolic"
+            }
             aria-valuenow={answers.length}
             aria-valuemin={0}
             aria-valuemax={countries.length}
@@ -172,22 +229,26 @@ export default function Game() {
           </svg>
         </div>
         <div className="atlas-legend" aria-label="Legenda mapy">
-          <span>
-            <i className="legend-current" /> Aktualny kraj
-          </span>
+          {!isCountries && (
+            <span>
+              <i className="legend-current" /> Aktualny kraj
+            </span>
+          )}
           <span>
             <i className="legend-correct" /> Odgadnięte
           </span>
           <span className="legend-pending">
             <i className="legend-waiting" /> Przed Tobą
           </span>
-          <span>
-            <i className="legend-capital" /> Stolice od 2×
-          </span>
+          {!isCountries && (
+            <span>
+              <i className="legend-capital" /> Stolice od 2×
+            </span>
+          )}
         </div>
         <section
           className={`atlas-dock ${status === "ready" ? "is-ready" : ""}`}
-          aria-label="Aktualne pytanie"
+          aria-label={isCountries ? "Odgaduj państwa" : "Aktualne pytanie"}
         >
           <div className="atlas-dock-country">
             <p className="round-label">
@@ -197,12 +258,18 @@ export default function Game() {
                 }
               />
               {status === "playing"
-                ? "JAKA JEST STOLICA?"
+                ? isCountries
+                  ? "WPISZ DOWOLNE PAŃSTWO"
+                  : "JAKA JEST STOLICA?"
                 : "GOTOWY NA PODRÓŻ?"}
             </p>
             <h2 className="country-name">
-              <CountryFlag country={current} />
-              <span>{current.label}</span>
+              {isCountries ? (
+                <Icon name="globe" size={28} />
+              ) : (
+                <CountryFlag country={current} />
+              )}
+              <span>{isCountries ? "Wypełnij Europę" : current.label}</span>
             </h2>
             <span className="atlas-remaining">
               <Icon name="pin" size={13} /> Europa <span>·</span> Pozostało{" "}
@@ -211,12 +278,18 @@ export default function Game() {
           </div>
           <div className="atlas-dock-answer">
             <form onSubmit={(event) => event.preventDefault()}>
-              <label htmlFor="capital">Twoja odpowiedź</label>
+              <label htmlFor="capital">
+                {isCountries ? "Nazwa państwa" : "Twoja odpowiedź"}
+              </label>
               <div className="input-wrap">
                 <input
                   ref={input}
                   id="capital"
-                  placeholder="Wpisz nazwę stolicy…"
+                  placeholder={
+                    isCountries
+                      ? "Wpisz dowolne państwo…"
+                      : "Wpisz nazwę stolicy…"
+                  }
                   value={value}
                   onChange={handleInputChange}
                   disabled={status !== "playing"}
@@ -226,7 +299,7 @@ export default function Game() {
                   aria-describedby="answer-feedback answer-hint"
                   aria-invalid={false}
                   onKeyDown={(event) => {
-                    if (event.key === "Escape") {
+                    if (event.key === "Escape" && !isCountries) {
                       event.preventDefault();
                       skip();
                     }
@@ -269,13 +342,15 @@ export default function Game() {
               )}
             </div>
             <div className="atlas-dock-actions">
-              <button
-                className="atlas-skip"
-                onClick={skip}
-                disabled={status !== "playing"}
-              >
-                <Icon name="skip" size={15} /> Pomiń <kbd>Esc</kbd>
-              </button>
+              {!isCountries && (
+                <button
+                  className="atlas-skip"
+                  onClick={skip}
+                  disabled={status !== "playing"}
+                >
+                  <Icon name="skip" size={15} /> Pomiń <kbd>Esc</kbd>
+                </button>
+              )}
               <button
                 className="button danger atlas-finish"
                 onClick={() => setDialog("finish")}
@@ -317,10 +392,15 @@ export default function Game() {
           </div>
           {dialog === "help" ? (
             <>
-              <h2 id="dialog-title">Mała podróż po stolicach.</h2>
+              <h2 id="dialog-title">
+                {isCountries
+                  ? "Wypełnij mapę z pamięci."
+                  : "Mała podróż po stolicach."}
+              </h2>
               <p>
-                Odgadnij stolice 45 krajów z oryginalnego zestawu gry. Aktualny
-                kraj znajdziesz na mapie w złotym kolorze.
+                {isCountries
+                  ? "Wymień wszystkie 45 państw z zestawu gry, w dowolnej kolejności. Każde odgadnięte państwo pokoloruje się na zielono. Nazwy nieodgadniętych państw pozostają ukryte."
+                  : "Odgadnij stolice 45 krajów z oryginalnego zestawu gry. Aktualny kraj znajdziesz na mapie w złotym kolorze."}
               </p>
               <ol>
                 <li>Kliknij „Zaczynamy”, aby uruchomić czas.</li>
@@ -330,19 +410,24 @@ export default function Game() {
                   widoku Europy przywraca pozycję początkową.
                 </li>
                 <li>
-                  Wpisz stolicę po polsku lub angielsku. Poprawna odpowiedź
-                  zaliczy się automatycznie — bez Entera. Wielkość liter i znaki
-                  diakrytyczne nie mają znaczenia.
+                  {isCountries
+                    ? "Wpisz dowolne państwo po polsku lub angielsku. Pełna poprawna nazwa zaliczy się automatycznie. Każde państwo liczy się tylko raz."
+                    : "Wpisz stolicę po polsku lub angielsku. Poprawna odpowiedź zaliczy się automatycznie — bez Entera."}{" "}
+                  Wielkość liter i znaki diakrytyczne nie mają znaczenia.
                 </li>
-                <li>
-                  Po odgadnięciu stolicy przybliż mapę co najmniej do 2×, aby
-                  zobaczyć jej punkt i nazwę. Granatowo-turkusowe oznaczenia
-                  pokazują tylko odgadnięte stolice.
-                </li>
-                <li>
-                  Pomiń kraj przyciskiem lub klawiszem Esc. Powróci w tej samej
-                  rundzie.
-                </li>
+                {!isCountries && (
+                  <li>
+                    Po odgadnięciu stolicy przybliż mapę co najmniej do 2×, aby
+                    zobaczyć jej punkt i nazwę. Granatowo-turkusowe oznaczenia
+                    pokazują tylko odgadnięte stolice.
+                  </li>
+                )}
+                {!isCountries && (
+                  <li>
+                    Pomiń kraj przyciskiem lub klawiszem Esc. Powróci w tej
+                    samej rundzie.
+                  </li>
+                )}
               </ol>
               <p>
                 Nie ma limitu czasu ani kary za błędy. Po zakończeniu zobaczysz
@@ -359,9 +444,9 @@ export default function Game() {
             <>
               <h2 id="dialog-title">Na pewno zakończyć grę?</h2>
               <p>
-                Odgadnięto {answers.length} z {countries.length} stolic. Po
-                zakończeniu zobaczysz swój wynik oraz wszystkie nieodgadnięte
-                stolice do powtórki.
+                Odgadnięto {answers.length} z {countries.length} {unit}. Po
+                zakończeniu zobaczysz swój wynik oraz wszystkie nieodgadnięte{" "}
+                {isCountries ? "państwa" : "stolice"} do powtórki.
               </p>
               <div className="modal-actions">
                 <button

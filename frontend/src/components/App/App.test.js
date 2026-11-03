@@ -166,3 +166,116 @@ test("can end a game with no correct answers after confirmation", () => {
     "45",
   );
 });
+
+test("countries minigame accepts any country, ignores partial names and counts duplicates only once", () => {
+  window.history.replaceState({}, "", "/countries");
+  render(<App />);
+  start();
+  const input = screen.getByLabelText("Nazwa państwa");
+  const type = (value) => fireEvent.change(input, { target: { value } });
+  expect(
+    screen.queryByRole("button", { name: /Pomiń/ }),
+  ).not.toBeInTheDocument();
+  type("Pols");
+  expect(screen.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "0");
+  type("  POLSKA  ");
+  expect(screen.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "1");
+  expect(input).toHaveValue("");
+  type("Poland");
+  expect(screen.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "1");
+  expect(screen.getByRole("status")).toHaveTextContent(
+    "Polska jest już na mapie",
+  );
+  type("Czechia");
+  expect(screen.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "2");
+  type("BOSNIA I HERCEGOWINA");
+  expect(screen.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "3");
+  type("Cypr");
+  expect(screen.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "3");
+  act(() => {
+    jest.advanceTimersByTime(300);
+  });
+  expect(screen.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "4");
+  expect(input).toHaveValue("");
+});
+
+test("all countries finish the second minigame, with separate results and replay", () => {
+  const capitalResult = { mode: "capitals", answers: ["Albania"], seconds: 7 };
+  sessionStorage.setItem("capitalrace-result", JSON.stringify(capitalResult));
+  window.history.replaceState({}, "", "/countries");
+  const view = render(<App />);
+  start();
+  countries.forEach((country, index) => {
+    for (let length = 1; length <= country.name.length; length++) {
+      fireEvent.change(screen.getByLabelText("Nazwa państwa"), {
+        target: { value: country.name.slice(0, length) },
+      });
+      if (length < country.name.length) {
+        expect(screen.getByRole("progressbar")).toHaveAttribute(
+          "aria-valuenow",
+          String(index),
+        );
+      }
+    }
+    act(() => {
+      jest.advanceTimersByTime(300);
+    });
+    if (index < countries.length - 1) {
+      expect(screen.getByRole("progressbar")).toHaveAttribute(
+        "aria-valuenow",
+        String(index + 1),
+      );
+    }
+  });
+  expect(window.location.pathname).toBe("/countries/results");
+  expect(
+    screen.getByText("Wszystkie państwa odgadnięte. Świetna robota!"),
+  ).toBeInTheDocument();
+  expect(screen.queryByText("Tirana")).not.toBeInTheDocument();
+  expect(
+    JSON.parse(sessionStorage.getItem("capitalrace-countries-result")).answers,
+  ).toHaveLength(45);
+  expect(JSON.parse(sessionStorage.getItem("capitalrace-result"))).toEqual(
+    capitalResult,
+  );
+  view.unmount();
+  render(<App />);
+  expect(screen.getByText("45 / 45")).toBeInTheDocument();
+  fireEvent.click(screen.getByRole("link", { name: /Zagraj ponownie/ }));
+  expect(window.location.pathname).toBe("/countries");
+  expect(screen.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "0");
+  expect(screen.getByRole("button", { name: /Zaczynamy/ })).toBeInTheDocument();
+});
+
+test("countries minigame can end early with confirmation and show missing countries", () => {
+  window.history.replaceState({}, "", "/countries");
+  render(<App />);
+  start();
+  fireEvent.change(screen.getByLabelText("Nazwa państwa"), {
+    target: { value: "Polska" },
+  });
+  fireEvent.click(screen.getByRole("button", { name: "Zakończ grę" }));
+  expect(screen.getByRole("dialog")).toHaveTextContent("1 z 45 państw");
+  fireEvent.click(screen.getByRole("button", { name: "Tak, zakończ grę" }));
+  expect(screen.getByText("1 / 45")).toBeInTheDocument();
+  fireEvent.click(screen.getByRole("button", { name: /Do powtórki/ }));
+  expect(document.querySelectorAll(".answer-row")).toHaveLength(44);
+  expect(screen.queryByText("Polska")).not.toBeInTheDocument();
+});
+
+test("switching minigames initializes an independent round", () => {
+  render(<App />);
+  start();
+  answer("Tirana");
+  fireEvent.click(screen.getByRole("link", { name: "Państwa", exact: true }));
+  expect(screen.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "0");
+  expect(screen.getByLabelText("Nazwa państwa")).toBeDisabled();
+  start();
+  fireEvent.change(screen.getByLabelText("Nazwa państwa"), {
+    target: { value: "Polska" },
+  });
+  fireEvent.click(screen.getByRole("link", { name: "Stolice", exact: true }));
+  expect(screen.getByRole("heading", { name: "Albania" })).toBeInTheDocument();
+  expect(screen.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "0");
+  expect(screen.getByLabelText("Twoja odpowiedź")).toBeDisabled();
+});

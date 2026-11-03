@@ -1,3 +1,5 @@
+import countries from "../data/countries.json";
+
 export default function shuffle(array) {
   const copy = [...array];
   for (let i = copy.length - 1; i > 0; i--) {
@@ -25,4 +27,33 @@ export function isCorrect(answer, country) {
 
 export function formatTime(seconds) {
   return `${String(Math.floor(seconds / 60)).padStart(2, "0")}:${String(seconds % 60).padStart(2, "0")}`;
+}
+
+const countryAliases = {
+  Netherlands: ["Niderlandy", "The Netherlands"],
+  "Czech Republic": ["Czechia"],
+  "United Kingdom": ["Zjednoczone Królestwo", "Great Britain"],
+  "Vatican City": ["Holy See"],
+};
+
+const countryNames = (country) => [
+  country.label,
+  country.name,
+  ...(countryAliases[country.name] || []),
+];
+
+export function findCountry(answer) {
+  const normalized = normalize(answer);
+  if (!normalized) return undefined;
+  return countries.find((country) =>
+    countryNames(country).some((name) => normalize(name) === normalized),
+  );
+}
+
+export function isCountryNamePrefix(answer, country) {
+  const normalized = normalize(answer);
+  return countryNames(country).some(
+    (name) =>
+      normalize(name) !== normalized && normalize(name).startsWith(normalized),
+  );
 }

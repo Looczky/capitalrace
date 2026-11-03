@@ -1,6 +1,6 @@
 # Capitalrace
 
-Gra w stolice 45 krajów Europy. Polski interfejs, mapa postępu i podsumowanie z odpowiedziami do powtórki.
+Dwie minigry geograficzne na mapie Europy: stolice i państwa. Polski interfejs, mapa postępu i osobne podsumowania z odpowiedziami do powtórki.
 
 ## Uruchomienie
 
@@ -56,3 +56,13 @@ Pełnoekranowa mapa z panelem odpowiedzi i statystykami na mapie jest domyślnym
 Przy powiększeniu **od 2×** pojawiają się granatowo-turkusowe punkty z polskimi nazwami **wyłącznie odgadniętych** stolic. Po oddaleniu poniżej 2× oznaczenia znikają. Punkt i napis zachowują czytelny rozmiar podczas zmiany zoomu; nie są pokazywane dla nieodgadniętych ani pominiętych krajów.
 
 Współrzędne `capitalCoordinates` mają format `[długość geograficzna, szerokość geograficzna]` i pochodzą z [Natural Earth — Populated Places](https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/), z [pliku GeoJSON](https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_10m_populated_places_simple.geojson) (dane public domain).
+
+## Druga minigra: państwa Europy
+
+Wybierz **Państwa** w przełączniku minigier lub otwórz `/countries`. Wpisuj dowolne z 45 państw zestawu w dowolnej kolejności. Poprawna pełna nazwa automatycznie koloruje państwo na zielono. Gra kończy się po odgadnięciu wszystkich państw albo po potwierdzeniu czerwonego przycisku zakończenia.
+
+- Akceptowane są nazwy polskie i angielskie, bez rozróżniania wielkości liter i znaków diakrytycznych, oraz warianty takie jak „Niderlandy” i „Czechia”.
+- Powtórzone państwo nie zwiększa wyniku.
+- Przed odgadnięciem mapa nie zdradza nazwy kraju w podpowiedziach. Ten tryb nie wskazuje wybranego kraju ani nie pokazuje nazw stolic.
+- Wyniki państw są na `/countries/results`, zapisywane osobno od wyników stolic i zachowywane po odświeżeniu.
+- Przełączenie minigry rozpoczyna nową rundę wybranego trybu.

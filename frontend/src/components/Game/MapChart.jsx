@@ -31,7 +31,13 @@ export default function MapChart({
   currentCountry,
   gameRunning = true,
   interactive = false,
+  mode = "capitals",
 }) {
+  const isCountries = mode === "countries";
+  const labelFor = (name) =>
+    isCountries && gameRunning && !results.includes(name)
+      ? "Nieodgadnięte państwo"
+      : countries.find((country) => country.name === name)?.label || name;
   const container = useRef(null);
   const [size, setSize] = useState({ width: 1200, height: 800 });
   const [position, setPosition] = useState({
@@ -133,10 +139,7 @@ export default function MapChart({
                 pressed: { outline: "none" },
               }}
             >
-              <title>
-                {countries.find((c) => c.name === mapName(geo.properties.NAME))
-                  ?.label || geo.properties.NAME}
-              </title>
+              <title>{labelFor(mapName(geo.properties.NAME))}</title>
             </Geography>
           ))
         }
@@ -150,7 +153,7 @@ export default function MapChart({
             strokeWidth={1}
             vectorEffect="non-scaling-stroke"
           >
-            <title>{countries.find((c) => c.name === name)?.label}</title>
+            <title>{labelFor(name)}</title>
           </circle>
         </Marker>
       ))}
@@ -187,7 +190,11 @@ export default function MapChart({
           }}
           width={size.width}
           height={size.height}
-          aria-label="Złoty kraj to aktualne pytanie, zielone kraje są odgadnięte."
+          aria-label={
+            isCountries
+              ? "Zielony kolor oznacza odgadnięte państwa."
+              : "Złoty kraj to aktualne pytanie, zielone kraje są odgadnięte."
+          }
         >
           <ZoomableGroup
             center={position.coordinates}
@@ -202,7 +209,7 @@ export default function MapChart({
             filterZoomEvent={filterZoomEvent}
           >
             {features}
-            <CapitalMarkers results={results} />
+            {!isCountries && <CapitalMarkers results={results} />}
           </ZoomableGroup>
         </ComposableMap>
       </div>

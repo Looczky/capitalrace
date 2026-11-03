@@ -1824,3 +1824,54 @@ kbd {
     bottom: 300px;
   }
 }
+
+.mode-switch {
+  display: inline-flex;
+  gap: 3px;
+  padding: 4px;
+  border-radius: 9px;
+  border: 1px solid #d4decd;
+  background: #f8fbf3ed;
+  backdrop-filter: blur(12px);
+  margin-bottom: 18px;
+  pointer-events: auto;
+}
+.mode-switch a {
+  padding: 8px 17px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: #7d8d73;
+}
+.mode-switch a.active {
+  background: #30583f;
+  color: #fff;
+}
+.mode-switch a:hover:not(.active) {
+  background: #e5eddd;
+  color: #30583f;
+}
+@media (max-width: 760px) {
+  .atlas-heading .mode-switch {
+    margin: 0;
+    padding: 3px;
+    gap: 1px;
+  }
+  .atlas-heading .mode-switch a {
+    padding: 8px 11px;
+    font-size: 10px;
+  }
+  .atlas-heading h1 {
+    display: none;
+  }
+}
+@media (max-width: 360px) {
+  .atlas-heading .mode-switch a {
+    padding-inline: 9px;
+  }
+}
+
+.atlas-dock-actions .atlas-finish {
+  margin-left: auto;
+}

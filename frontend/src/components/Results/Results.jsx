@@ -1,18 +1,27 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Shell from "../App/Shell";
+import ModeSwitch from "../App/ModeSwitch";
 import CountryFlag from "../App/CountryFlag";
 import Icon from "../App/Icon";
 import MapChart from "../Game/MapChart";
 import countries from "../../data/countries.json";
 import { formatTime } from "../../utils/utils";
 
-function loadResult(state) {
+function loadResult(state, mode) {
   try {
     const result =
-      state || JSON.parse(sessionStorage.getItem("capitalrace-result"));
+      state ||
+      JSON.parse(
+        sessionStorage.getItem(
+          mode === "countries"
+            ? "capitalrace-countries-result"
+            : "capitalrace-result",
+        ),
+      );
     if (
       !result ||
+      (result.mode || "capitals") !== mode ||
       !Array.isArray(result.answers) ||
       !Number.isFinite(result.seconds) ||
       result.seconds < 0
@@ -32,9 +41,11 @@ function loadResult(state) {
     return null;
   }
 }
-export default function Results() {
+export default function Results({ mode = "capitals" }) {
+  const isCountries = mode === "countries";
+  const gamePath = isCountries ? "/countries" : "/";
   const { state } = useLocation();
-  const [result] = useState(() => loadResult(state));
+  const [result] = useState(() => loadResult(state, mode));
   const [filter, setFilter] = useState("all");
   if (!result)
     return (
@@ -43,7 +54,7 @@ export default function Results() {
           <Icon name="globe" size={48} />
           <h1>Twoja podróż dopiero się zaczyna.</h1>
           <p>Rozegraj rundę, aby zobaczyć swoje wyniki.</p>
-          <Link className="button primary" to="/">
+          <Link className="button primary" to={gamePath}>
             Przejdź do gry <Icon name="arrow" />
           </Link>
         </section>
@@ -61,6 +72,7 @@ export default function Results() {
     <Shell>
       <section className="intro">
         <div>
+          <ModeSwitch />
           <p className="eyebrow">
             <span className="tiny-line" /> TWOJA PODRÓŻ W LICZBACH
           </p>
@@ -71,11 +83,13 @@ export default function Results() {
           </h1>
           <p className="intro-description">
             {count === countries.length
-              ? "Wszystkie stolice odgadnięte. Świetna robota!"
+              ? isCountries
+                ? "Wszystkie państwa odgadnięte. Świetna robota!"
+                : "Wszystkie stolice odgadnięte. Świetna robota!"
               : "Sprawdź odpowiedzi i odkryj, co warto zapamiętać na kolejną rundę."}
           </p>
         </div>
-        <Link to="/" className="button primary">
+        <Link to={gamePath} className="button primary">
           <Icon name="restart" size={18} /> Zagraj ponownie
         </Link>
       </section>
@@ -93,7 +107,7 @@ export default function Results() {
               <b>
                 {count} / {countries.length}
               </b>{" "}
-              stolic
+              {isCountries ? "państw" : "stolic"}
             </span>
             <span>
               <Icon name="clock" /> <b>{formatTime(result.seconds)}</b> czas gry
@@ -101,7 +115,7 @@ export default function Results() {
           </div>
         </div>
         <div className="result-map">
-          <MapChart results={result.answers} gameRunning={false} />
+          <MapChart results={result.answers} gameRunning={false} mode={mode} />
         </div>
       </section>
       <section className="answers-section">
@@ -146,9 +160,15 @@ export default function Results() {
               <span>
                 <span className="answer-country">
                   <CountryFlag country={country} />
-                  <span>{country.label}</span>
+                  <span>
+                    {isCountries
+                      ? result.answers.includes(country.name)
+                        ? "Odgadnięte"
+                        : "Do powtórki"
+                      : country.label}
+                  </span>
                 </span>
-                <strong>{country.capital}</strong>
+                <strong>{isCountries ? country.label : country.capital}</strong>
               </span>
             </div>
           ))}
@@ -156,8 +176,12 @@ export default function Results() {
         {visible.length === 0 && (
           <p className="filter-empty">
             {filter === "correct"
-              ? "Jeszcze żadna stolica. Kolejna runda to nowa szansa!"
-              : "Wszystkie stolice odgadnięte — nie ma nic do powtórki!"}
+              ? isCountries
+                ? "Jeszcze żadne państwo. Kolejna runda to nowa szansa!"
+                : "Jeszcze żadna stolica. Kolejna runda to nowa szansa!"
+              : isCountries
+                ? "Wszystkie państwa odgadnięte — nie ma nic do powtórki!"
+                : "Wszystkie stolice odgadnięte — nie ma nic do powtórki!"}
           </p>
         )}
       </section>
