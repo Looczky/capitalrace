@@ -1,37 +1,26 @@
-import React from 'react';
-import Game, { loader as countriesLoader } from '../Game/Game';
-import Results from '../Results/Results';
-import {
-  createBrowserRouter,
-  Route,
-  RouterProvider
-} from 'react-router-dom'
-// Bootstrap CSS
-import "bootstrap/dist/css/bootstrap.min.css";
-// Bootstrap Bundle JS
-import "bootstrap/dist/js/bootstrap.bundle.min";
-import ErrorPage from '../../error_pages/error_page';
+import React, { useEffect } from "react";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import Game from "../Game/Game";
+import Results from "../Results/Results";
+import "./App.css";
 
-const router = createBrowserRouter([
-  {
-    path:'/',
-    element:<Game/>,
-    errorElement: <ErrorPage/>,
-    loader: countriesLoader,
-  },
-  {
-    path:'/results',
-    element: <Results/>,
-    errorElement: <ErrorPage/>,
-  },
-]);
-
-function App() {
-  return (
-    <div>
-      <RouterProvider router={router}/>
-    </div>
-  );
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
 }
 
-export default App;
+export default function App() {
+  return (
+    <BrowserRouter>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<Game />} />
+        <Route path="/results" element={<Results />} />
+        <Route path="*" element={<Game />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}

@@ -1,0 +1,317 @@
+[
+  {
+    "name": "Albania",
+    "label": "Albania",
+    "capital": "Tirana",
+    "englishCapital": "Tirana",
+    "code": "al"
+  },
+  {
+    "name": "Andorra",
+    "label": "Andora",
+    "capital": "Andora",
+    "englishCapital": "Andorra la Vella",
+    "code": "ad"
+  },
+  {
+    "name": "Austria",
+    "label": "Austria",
+    "capital": "Wiedeń",
+    "englishCapital": "Vienna",
+    "code": "at"
+  },
+  {
+    "name": "Belarus",
+    "label": "Białoruś",
+    "capital": "Mińsk",
+    "englishCapital": "Minsk",
+    "code": "by"
+  },
+  {
+    "name": "Belgium",
+    "label": "Belgia",
+    "capital": "Bruksela",
+    "englishCapital": "Brussels",
+    "code": "be"
+  },
+  {
+    "name": "Bosnia and Herzegovina",
+    "label": "Bośnia i Hercegowina",
+    "capital": "Sarajewo",
+    "englishCapital": "Sarajevo",
+    "code": "ba"
+  },
+  {
+    "name": "Bulgaria",
+    "label": "Bułgaria",
+    "capital": "Sofia",
+    "englishCapital": "Sofia",
+    "code": "bg"
+  },
+  {
+    "name": "Croatia",
+    "label": "Chorwacja",
+    "capital": "Zagrzeb",
+    "englishCapital": "Zagreb",
+    "code": "hr"
+  },
+  {
+    "name": "Cyprus",
+    "label": "Cypr",
+    "capital": "Nikozja",
+    "englishCapital": "Nicosia",
+    "code": "cy"
+  },
+  {
+    "name": "Czech Republic",
+    "label": "Czechy",
+    "capital": "Praga",
+    "englishCapital": "Prague",
+    "code": "cz"
+  },
+  {
+    "name": "Denmark",
+    "label": "Dania",
+    "capital": "Kopenhaga",
+    "englishCapital": "Copenhagen",
+    "code": "dk"
+  },
+  {
+    "name": "Estonia",
+    "label": "Estonia",
+    "capital": "Tallinn",
+    "englishCapital": "Tallinn",
+    "code": "ee"
+  },
+  {
+    "name": "Finland",
+    "label": "Finlandia",
+    "capital": "Helsinki",
+    "englishCapital": "Helsinki",
+    "code": "fi"
+  },
+  {
+    "name": "France",
+    "label": "Francja",
+    "capital": "Paryż",
+    "englishCapital": "Paris",
+    "code": "fr"
+  },
+  {
+    "name": "Germany",
+    "label": "Niemcy",
+    "capital": "Berlin",
+    "englishCapital": "Berlin",
+    "code": "de"
+  },
+  {
+    "name": "Greece",
+    "label": "Grecja",
+    "capital": "Ateny",
+    "englishCapital": "Athens",
+    "code": "gr"
+  },
+  {
+    "name": "Hungary",
+    "label": "Węgry",
+    "capital": "Budapeszt",
+    "englishCapital": "Budapest",
+    "code": "hu"
+  },
+  {
+    "name": "Iceland",
+    "label": "Islandia",
+    "capital": "Reykjavík",
+    "englishCapital": "Reykjavik",
+    "code": "is"
+  },
+  {
+    "name": "Ireland",
+    "label": "Irlandia",
+    "capital": "Dublin",
+    "englishCapital": "Dublin",
+    "code": "ie"
+  },
+  {
+    "name": "Italy",
+    "label": "Włochy",
+    "capital": "Rzym",
+    "englishCapital": "Rome",
+    "code": "it"
+  },
+  {
+    "name": "Latvia",
+    "label": "Łotwa",
+    "capital": "Ryga",
+    "englishCapital": "Riga",
+    "code": "lv"
+  },
+  {
+    "name": "Liechtenstein",
+    "label": "Liechtenstein",
+    "capital": "Vaduz",
+    "englishCapital": "Vaduz",
+    "code": "li"
+  },
+  {
+    "name": "Lithuania",
+    "label": "Litwa",
+    "capital": "Wilno",
+    "englishCapital": "Vilnius",
+    "code": "lt"
+  },
+  {
+    "name": "Luxembourg",
+    "label": "Luksemburg",
+    "capital": "Luksemburg",
+    "englishCapital": "Luxembourg City",
+    "code": "lu"
+  },
+  {
+    "name": "Malta",
+    "label": "Malta",
+    "capital": "Valletta",
+    "englishCapital": "Valletta",
+    "code": "mt"
+  },
+  {
+    "name": "Moldova",
+    "label": "Mołdawia",
+    "capital": "Kiszyniów",
+    "englishCapital": "Chisinau",
+    "code": "md"
+  },
+  {
+    "name": "Monaco",
+    "label": "Monako",
+    "capital": "Monako",
+    "englishCapital": "Monaco",
+    "code": "mc"
+  },
+  {
+    "name": "Montenegro",
+    "label": "Czarnogóra",
+    "capital": "Podgorica",
+    "englishCapital": "Podgorica",
+    "code": "me"
+  },
+  {
+    "name": "Netherlands",
+    "label": "Holandia",
+    "capital": "Amsterdam",
+    "englishCapital": "Amsterdam",
+    "code": "nl"
+  },
+  {
+    "name": "North Macedonia",
+    "label": "Macedonia Północna",
+    "capital": "Skopje",
+    "englishCapital": "Skopje",
+    "code": "mk"
+  },
+  {
+    "name": "Norway",
+    "label": "Norwegia",
+    "capital": "Oslo",
+    "englishCapital": "Oslo",
+    "code": "no"
+  },
+  {
+    "name": "Poland",
+    "label": "Polska",
+    "capital": "Warszawa",
+    "englishCapital": "Warsaw",
+    "code": "pl"
+  },
+  {
+    "name": "Portugal",
+    "label": "Portugalia",
+    "capital": "Lizbona",
+    "englishCapital": "Lisbon",
+    "code": "pt"
+  },
+  {
+    "name": "Romania",
+    "label": "Rumunia",
+    "capital": "Bukareszt",
+    "englishCapital": "Bucharest",
+    "code": "ro"
+  },
+  {
+    "name": "Russia",
+    "label": "Rosja",
+    "capital": "Moskwa",
+    "englishCapital": "Moscow",
+    "code": "ru"
+  },
+  {
+    "name": "San Marino",
+    "label": "San Marino",
+    "capital": "San Marino",
+    "englishCapital": "San Marino",
+    "code": "sm"
+  },
+  {
+    "name": "Serbia",
+    "label": "Serbia",
+    "capital": "Belgrad",
+    "englishCapital": "Belgrade",
+    "code": "rs"
+  },
+  {
+    "name": "Slovakia",
+    "label": "Słowacja",
+    "capital": "Bratysława",
+    "englishCapital": "Bratislava",
+    "code": "sk"
+  },
+  {
+    "name": "Slovenia",
+    "label": "Słowenia",
+    "capital": "Lublana",
+    "englishCapital": "Ljubljana",
+    "code": "si"
+  },
+  {
+    "name": "Spain",
+    "label": "Hiszpania",
+    "capital": "Madryt",
+    "englishCapital": "Madrid",
+    "code": "es"
+  },
+  {
+    "name": "Sweden",
+    "label": "Szwecja",
+    "capital": "Sztokholm",
+    "englishCapital": "Stockholm",
+    "code": "se"
+  },
+  {
+    "name": "Switzerland",
+    "label": "Szwajcaria",
+    "capital": "Berno",
+    "englishCapital": "Bern",
+    "code": "ch"
+  },
+  {
+    "name": "Ukraine",
+    "label": "Ukraina",
+    "capital": "Kijów",
+    "englishCapital": "Kyiv",
+    "code": "ua"
+  },
+  {
+    "name": "United Kingdom",
+    "label": "Wielka Brytania",
+    "capital": "Londyn",
+    "englishCapital": "London",
+    "code": "gb"
+  },
+  {
+    "name": "Vatican City",
+    "label": "Watykan",
+    "capital": "Watykan",
+    "englishCapital": "Vatican City",
+    "code": "va"
+  }
+]
