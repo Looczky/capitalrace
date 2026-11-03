@@ -1875,3 +1875,87 @@ kbd {
 .atlas-dock-actions .atlas-finish {
   margin-left: auto;
 }
+
+.region-select {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #58744d;
+  border: 1px solid #d4decd;
+  border-radius: 8px;
+  background: #fbfcf7ed;
+  padding: 0 10px;
+  backdrop-filter: blur(12px);
+}
+.region-select select {
+  min-width: 0;
+  width: 170px;
+  border: 0;
+  color: #35563c;
+  background: transparent;
+  font: inherit;
+  font-size: 11px;
+  padding: 11px 0;
+  cursor: pointer;
+}
+.region-select:focus-within {
+  outline: 2px solid #b57d35;
+  outline-offset: 3px;
+}
+.region-select select:focus {
+  outline: none;
+}
+.atlas-heading h1 {
+  max-width: 290px;
+}
+.answer-notes {
+  display: block;
+  margin-top: 8px;
+  color: #7c8b73;
+  font-size: 10px;
+  line-height: 1.6;
+}
+@media (min-width: 761px) and (max-width: 1050px) {
+  .atlas-stats {
+    top: 87px;
+    left: auto;
+    right: 32px;
+    transform: none;
+  }
+}
+@media (max-width: 760px) {
+  .site-header nav,
+  .atlas-shell .site-header nav {
+    gap: 7px;
+  }
+  .region-select {
+    padding: 0 6px;
+    gap: 0;
+  }
+  .region-select > svg {
+    display: none;
+  }
+  .region-select select {
+    width: clamp(100px, calc(100vw - 236px), 140px);
+    padding-block: 10px;
+    font-size: 9px;
+  }
+  .help-label {
+    display: none;
+  }
+  .atlas-shell .help-button,
+  .help-button {
+    padding: 9px;
+    min-width: 35px;
+    justify-content: center;
+  }
+  .site-header .brand {
+    font-size: 20px;
+  }
+}
+@media (max-width: 360px) {
+  .site-header .brand,
+  .atlas-shell .brand {
+    font-size: 18px;
+  }
+}

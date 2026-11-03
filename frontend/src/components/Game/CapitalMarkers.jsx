@@ -1,6 +1,6 @@
 import React from "react";
 import { Marker, useZoomPanContext } from "react-simple-maps";
-import countries from "../../data/countries.json";
+import defaultCountries from "../../data/countries.json";
 
 export const CAPITAL_ZOOM_THRESHOLD = 2;
 // Separate labels for nearby capitals, especially Rome and Vatican City.
@@ -13,18 +13,36 @@ const labelOffsets = {
   Finland: [10, -11],
   Slovenia: [-10, -12],
   Croatia: [10, 13],
+  Israel: [10, -12],
+  Palestine: [-10, 14],
+  "Saint Lucia": [-10, -11],
+  "Saint Vincent and the Grenadines": [10, 12],
+  Grenada: [-10, 13],
 };
 
-export default function CapitalMarkers({ results }) {
+export default function CapitalMarkers({
+  results,
+  countries = defaultCountries,
+}) {
   const { k: zoom } = useZoomPanContext();
   if (zoom < CAPITAL_ZOOM_THRESHOLD) return null;
 
   return countries
     .filter((country) => results.includes(country.name))
+    .flatMap((country) => [
+      country,
+      ...(country.capitalVariants || []).map((variant) => ({
+        ...country,
+        ...variant,
+      })),
+    ])
     .map((country) => {
       const [x, y] = labelOffsets[country.name] || [10, -11];
       return (
-        <Marker key={country.name} coordinates={country.capitalCoordinates}>
+        <Marker
+          key={`${country.name}-${country.capital}`}
+          coordinates={country.capitalCoordinates}
+        >
           <g
             className="capital-marker"
             transform={`scale(${1 / zoom})`}

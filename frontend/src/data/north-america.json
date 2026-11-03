@@ -1,0 +1,296 @@
+[
+  {
+    "name": "Antigua and Barbuda",
+    "label": "Antigua i Barbuda",
+    "capital": "Saint John's",
+    "englishCapital": "Saint John's",
+    "code": "ag",
+    "capitalCoordinates": [
+      -61.850034,
+      17.118036
+    ],
+    "mapMarker": true
+  },
+  {
+    "name": "Bahamas",
+    "label": "Bahamy",
+    "capital": "Nassau",
+    "englishCapital": "Nassau",
+    "code": "bs",
+    "capitalCoordinates": [
+      -77.350044,
+      25.08339
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Barbados",
+    "label": "Barbados",
+    "capital": "Bridgetown",
+    "englishCapital": "Bridgetown",
+    "code": "bb",
+    "capitalCoordinates": [
+      -59.616527,
+      13.102003
+    ],
+    "mapMarker": true
+  },
+  {
+    "name": "Belize",
+    "label": "Belize",
+    "capital": "Belmopan",
+    "englishCapital": "Belmopan",
+    "code": "bz",
+    "capitalCoordinates": [
+      -88.767073,
+      17.252033
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Canada",
+    "label": "Kanada",
+    "capital": "Ottawa",
+    "englishCapital": "Ottawa",
+    "code": "ca",
+    "capitalCoordinates": [
+      -75.701961,
+      45.418643
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Costa Rica",
+    "label": "Kostaryka",
+    "capital": "San José",
+    "englishCapital": "San José",
+    "code": "cr",
+    "capitalCoordinates": [
+      -84.078814,
+      9.930371
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Cuba",
+    "label": "Kuba",
+    "capital": "Hawana",
+    "englishCapital": "Havana",
+    "code": "cu",
+    "capitalCoordinates": [
+      -82.366128,
+      23.133905
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Dominica",
+    "label": "Dominika",
+    "capital": "Roseau",
+    "englishCapital": "Roseau",
+    "code": "dm",
+    "capitalCoordinates": [
+      -61.387013,
+      15.301016
+    ],
+    "mapMarker": true
+  },
+  {
+    "name": "Dominican Republic",
+    "label": "Dominikana",
+    "capital": "Santo Domingo",
+    "englishCapital": "Santo Domingo",
+    "code": "do",
+    "capitalCoordinates": [
+      -69.929742,
+      18.470745
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "El Salvador",
+    "label": "Salwador",
+    "capital": "San Salvador",
+    "englishCapital": "San Salvador",
+    "code": "sv",
+    "capitalCoordinates": [
+      -89.215576,
+      13.70328
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Grenada",
+    "label": "Grenada",
+    "capital": "Saint George's",
+    "englishCapital": "Saint George's",
+    "code": "gd",
+    "capitalCoordinates": [
+      -61.741643,
+      12.052633
+    ],
+    "mapMarker": true
+  },
+  {
+    "name": "Guatemala",
+    "label": "Gwatemala",
+    "capital": "Gwatemala",
+    "englishCapital": "Guatemala City",
+    "code": "gt",
+    "capitalCoordinates": [
+      -90.528911,
+      14.623081
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Haiti",
+    "label": "Haiti",
+    "capital": "Port-au-Prince",
+    "englishCapital": "Port-au-Prince",
+    "code": "ht",
+    "capitalCoordinates": [
+      -72.33798,
+      18.54297
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Honduras",
+    "label": "Honduras",
+    "capital": "Tegucigalpa",
+    "englishCapital": "Tegucigalpa",
+    "code": "hn",
+    "capitalCoordinates": [
+      -87.219475,
+      14.103991
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Jamaica",
+    "label": "Jamajka",
+    "capital": "Kingston",
+    "englishCapital": "Kingston",
+    "code": "jm",
+    "capitalCoordinates": [
+      -76.767434,
+      17.977077
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Mexico",
+    "label": "Meksyk",
+    "capital": "Meksyk",
+    "englishCapital": "Mexico City",
+    "code": "mx",
+    "capitalCoordinates": [
+      -99.132934,
+      19.444388
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Nicaragua",
+    "label": "Nikaragua",
+    "capital": "Managua",
+    "englishCapital": "Managua",
+    "code": "ni",
+    "capitalCoordinates": [
+      -86.270437,
+      12.154962
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Panama",
+    "label": "Panama",
+    "capital": "Panama",
+    "englishCapital": "Panama City",
+    "code": "pa",
+    "capitalCoordinates": [
+      -79.534983,
+      8.969963
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Saint Kitts and Nevis",
+    "label": "Saint Kitts i Nevis",
+    "capital": "Basseterre",
+    "englishCapital": "Basseterre",
+    "code": "kn",
+    "capitalCoordinates": [
+      -62.717009,
+      17.302031
+    ],
+    "countryAliases": [
+      "St Kitts and Nevis"
+    ],
+    "mapMarker": true
+  },
+  {
+    "name": "Saint Lucia",
+    "label": "Saint Lucia",
+    "capital": "Castries",
+    "englishCapital": "Castries",
+    "code": "lc",
+    "capitalCoordinates": [
+      -60.992875,
+      14.007875
+    ],
+    "countryAliases": [
+      "St Lucia"
+    ],
+    "mapMarker": true
+  },
+  {
+    "name": "Saint Vincent and the Grenadines",
+    "label": "Saint Vincent i Grenadyny",
+    "capital": "Kingstown",
+    "englishCapital": "Kingstown",
+    "code": "vc",
+    "capitalCoordinates": [
+      -61.220236,
+      13.155756
+    ],
+    "countryAliases": [
+      "St Vincent and the Grenadines"
+    ],
+    "mapMarker": true
+  },
+  {
+    "name": "Trinidad and Tobago",
+    "label": "Trynidad i Tobago",
+    "capital": "Port-of-Spain",
+    "englishCapital": "Port of Spain",
+    "code": "tt",
+    "capitalCoordinates": [
+      -61.517031,
+      10.651997
+    ],
+    "mapMarker": true
+  },
+  {
+    "name": "United States",
+    "label": "Stany Zjednoczone",
+    "capital": "Waszyngton",
+    "englishCapital": "Washington, D.C.",
+    "code": "us",
+    "capitalCoordinates": [
+      -77.011364,
+      38.901495
+    ],
+    "aliases": [
+      "Washington",
+      "Washington DC",
+      "Washington D C"
+    ],
+    "countryAliases": [
+      "USA",
+      "United States of America"
+    ],
+    "mapMarker": false
+  }
+]

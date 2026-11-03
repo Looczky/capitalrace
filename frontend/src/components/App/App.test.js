@@ -1,6 +1,12 @@
 import { fireEvent, render, screen, act } from "@testing-library/react";
 import App from "./App";
 import countries from "../../data/countries.json";
+import {
+  REGIONS,
+  getGamePath,
+  getResultsPath,
+  getStorageKey,
+} from "../../data/regions";
 
 jest.mock("../Game/MapChart", () => () => <div data-testid="map" />);
 jest.mock("../../utils/utils", () => ({
@@ -26,6 +32,9 @@ function start() {
 function answer(value) {
   fireEvent.change(screen.getByLabelText("Twoja odpowiedź"), {
     target: { value },
+  });
+  act(() => {
+    jest.advanceTimersByTime(300);
   });
 }
 
@@ -278,4 +287,110 @@ test("switching minigames initializes an independent round", () => {
   expect(screen.getByRole("heading", { name: "Albania" })).toBeInTheDocument();
   expect(screen.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "0");
   expect(screen.getByLabelText("Twoja odpowiedź")).toBeDisabled();
+});
+
+const addedRegions = Object.values(REGIONS).filter(
+  (region) => region.id !== "europe",
+);
+
+test.each(addedRegions)(
+  "completes the countries game for $label and preserves its region on replay",
+  (region) => {
+    window.history.replaceState({}, "", getGamePath(region.id, "countries"));
+    render(<App />);
+    expect(screen.getByRole("combobox", { name: "Region" })).toHaveValue(
+      region.id,
+    );
+    expect(screen.getByRole("progressbar")).toHaveAttribute(
+      "aria-valuemax",
+      String(region.countries.length),
+    );
+    start();
+    region.countries.forEach((country) => {
+      fireEvent.change(screen.getByLabelText("Nazwa państwa"), {
+        target: { value: country.name },
+      });
+      act(() => {
+        jest.advanceTimersByTime(300);
+      });
+    });
+    expect(window.location.pathname).toBe(
+      getResultsPath(region.id, "countries"),
+    );
+    expect(
+      screen.getByRole("heading", { name: region.winTitle }),
+    ).toBeInTheDocument();
+    const saved = JSON.parse(
+      sessionStorage.getItem(getStorageKey(region.id, "countries")),
+    );
+    expect(saved.regionId).toBe(region.id);
+    expect(saved.answers).toHaveLength(region.countries.length);
+    expect(sessionStorage.getItem("capitalrace-countries-result")).toBeNull();
+    fireEvent.click(screen.getByRole("link", { name: /Zagraj ponownie/ }));
+    expect(window.location.pathname).toBe(getGamePath(region.id, "countries"));
+    expect(screen.getByRole("progressbar")).toHaveAttribute(
+      "aria-valuenow",
+      "0",
+    );
+  },
+);
+
+test.each(addedRegions)(
+  "accepts capitals and restores separate results for $label",
+  (region) => {
+    window.history.replaceState({}, "", getGamePath(region.id));
+    const view = render(<App />);
+    start();
+    answer(region.countries[0].capital);
+    act(() => {
+      jest.advanceTimersByTime(300);
+    });
+    expect(screen.getByRole("progressbar")).toHaveAttribute(
+      "aria-valuenow",
+      "1",
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Zakończ grę" }));
+    fireEvent.click(screen.getByRole("button", { name: "Tak, zakończ grę" }));
+    expect(window.location.pathname).toBe(getResultsPath(region.id));
+    expect(
+      screen.getByText(`1 / ${region.countries.length}`),
+    ).toBeInTheDocument();
+    view.unmount();
+    render(<App />);
+    expect(
+      screen.getByText(`1 / ${region.countries.length}`),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("combobox", { name: "Region" })).toHaveValue(
+      region.id,
+    );
+  },
+);
+
+test("changing region preserves the minigame and changing minigame preserves the region", () => {
+  window.history.replaceState({}, "", "/countries");
+  render(<App />);
+  fireEvent.change(screen.getByRole("combobox", { name: "Region" }), {
+    target: { value: "africa" },
+  });
+  expect(window.location.pathname).toBe("/play/africa/countries");
+  expect(screen.getByLabelText("Nazwa państwa")).toBeDisabled();
+  fireEvent.click(screen.getByRole("link", { name: "Stolice", exact: true }));
+  expect(window.location.pathname).toBe("/play/africa");
+  expect(screen.getByRole("heading", { name: "Algieria" })).toBeInTheDocument();
+  fireEvent.change(screen.getByRole("combobox", { name: "Region" }), {
+    target: { value: "asia" },
+  });
+  expect(window.location.pathname).toBe("/play/asia");
+  expect(
+    screen.getByRole("heading", { name: "Afganistan" }),
+  ).toBeInTheDocument();
+});
+
+test("an invalid region returns to the default game", () => {
+  window.history.replaceState({}, "", "/play/unknown/countries");
+  render(<App />);
+  expect(window.location.pathname).toBe("/");
+  expect(screen.getByRole("combobox", { name: "Region" })).toHaveValue(
+    "europe",
+  );
 });

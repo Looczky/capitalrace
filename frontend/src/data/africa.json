@@ -1,0 +1,715 @@
+[
+  {
+    "name": "Algeria",
+    "label": "Algieria",
+    "capital": "Algier",
+    "englishCapital": "Algiers",
+    "code": "dz",
+    "capitalCoordinates": [
+      3.048607,
+      36.765011
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Angola",
+    "label": "Angola",
+    "capital": "Luanda",
+    "englishCapital": "Luanda",
+    "code": "ao",
+    "capitalCoordinates": [
+      13.232481,
+      -8.83634
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Benin",
+    "label": "Benin",
+    "capital": "Porto-Novo",
+    "englishCapital": "Porto-Novo",
+    "code": "bj",
+    "capitalCoordinates": [
+      2.616626,
+      6.483311
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Botswana",
+    "label": "Botswana",
+    "capital": "Gaborone",
+    "englishCapital": "Gaborone",
+    "code": "bw",
+    "capitalCoordinates": [
+      25.911948,
+      -24.646314
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Burkina Faso",
+    "label": "Burkina Faso",
+    "capital": "Wagadugu",
+    "englishCapital": "Ouagadougou",
+    "code": "bf",
+    "capitalCoordinates": [
+      -1.52667,
+      12.372262
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Burundi",
+    "label": "Burundi",
+    "capital": "Gitega",
+    "englishCapital": "Gitega",
+    "code": "bi",
+    "capitalCoordinates": [
+      29.843594,
+      -3.426007
+    ],
+    "notes": "Gitega jest stolicą polityczną od 2019 r.; Bużumbura pozostaje ośrodkiem gospodarczym.",
+    "mapMarker": false
+  },
+  {
+    "name": "Cape Verde",
+    "label": "Republika Zielonego Przylądka",
+    "capital": "Praia",
+    "englishCapital": "Praia",
+    "code": "cv",
+    "capitalCoordinates": [
+      -23.516689,
+      14.916698
+    ],
+    "countryAliases": [
+      "Cabo Verde",
+      "Zielony Przylądek"
+    ],
+    "mapMarker": true
+  },
+  {
+    "name": "Cameroon",
+    "label": "Kamerun",
+    "capital": "Jaunde",
+    "englishCapital": "Yaoundé",
+    "code": "cm",
+    "capitalCoordinates": [
+      11.514705,
+      3.868647
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Central African Republic",
+    "label": "Republika Środkowoafrykańska",
+    "capital": "Bangi",
+    "englishCapital": "Bangui",
+    "code": "cf",
+    "capitalCoordinates": [
+      18.558288,
+      4.366644
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Chad",
+    "label": "Czad",
+    "capital": "Ndżamena",
+    "englishCapital": "N'Djamena",
+    "code": "td",
+    "capitalCoordinates": [
+      15.047202,
+      12.115042
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Comoros",
+    "label": "Komory",
+    "capital": "Moroni",
+    "englishCapital": "Moroni",
+    "code": "km",
+    "capitalCoordinates": [
+      43.240244,
+      -11.704158
+    ],
+    "mapMarker": true
+  },
+  {
+    "name": "Republic of the Congo",
+    "label": "Republika Konga",
+    "capital": "Brazzaville",
+    "englishCapital": "Brazzaville",
+    "code": "cg",
+    "capitalCoordinates": [
+      15.282744,
+      -4.25724
+    ],
+    "countryAliases": [
+      "Kongo",
+      "Congo",
+      "Congo Brazzaville"
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Democratic Republic of the Congo",
+    "label": "Demokratyczna Republika Konga",
+    "capital": "Kinszasa",
+    "englishCapital": "Kinshasa",
+    "code": "cd",
+    "capitalCoordinates": [
+      15.313026,
+      -4.327778
+    ],
+    "countryAliases": [
+      "DR Konga",
+      "DR Congo",
+      "Congo Kinshasa",
+      "DRC"
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Ivory Coast",
+    "label": "Wybrzeże Kości Słoniowej",
+    "capital": "Jamusukro",
+    "englishCapital": "Yamoussoukro",
+    "code": "ci",
+    "capitalCoordinates": [
+      -5.275503,
+      6.818381
+    ],
+    "countryAliases": [
+      "Côte d’Ivoire",
+      "Cote d Ivoire"
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Djibouti",
+    "label": "Dżibuti",
+    "capital": "Dżibuti",
+    "englishCapital": "Djibouti",
+    "code": "dj",
+    "capitalCoordinates": [
+      43.148002,
+      11.595014
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Egypt",
+    "label": "Egipt",
+    "capital": "Kair",
+    "englishCapital": "Cairo",
+    "code": "eg",
+    "capitalCoordinates": [
+      31.248022,
+      30.051906
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Equatorial Guinea",
+    "label": "Gwinea Równikowa",
+    "capital": "Ciudad de la Paz",
+    "englishCapital": "Ciudad de la Paz",
+    "code": "gq",
+    "capitalCoordinates": [
+      10.822,
+      1.586
+    ],
+    "aliases": [
+      "Oyala",
+      "Djibloho"
+    ],
+    "notes": "Od 2026 r. stolicą jest Ciudad de la Paz (wcześniej Malabo).",
+    "mapMarker": false
+  },
+  {
+    "name": "Eritrea",
+    "label": "Erytrea",
+    "capital": "Asmara",
+    "englishCapital": "Asmara",
+    "code": "er",
+    "capitalCoordinates": [
+      38.933324,
+      15.333339
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Eswatini",
+    "label": "Eswatini",
+    "capital": "Mbabane",
+    "englishCapital": "Mbabane",
+    "code": "sz",
+    "capitalCoordinates": [
+      31.133335,
+      -26.316651
+    ],
+    "countryAliases": [
+      "Suazi",
+      "Swaziland"
+    ],
+    "notes": "Mbabane — administracyjna; Lobamba — królewska i ustawodawcza.",
+    "capitalVariants": [
+      {
+        "capital": "Lobamba",
+        "englishCapital": "Lobamba",
+        "capitalCoordinates": [
+          31.199997,
+          -26.466667
+        ]
+      }
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Ethiopia",
+    "label": "Etiopia",
+    "capital": "Addis Abeba",
+    "englishCapital": "Addis Ababa",
+    "code": "et",
+    "capitalCoordinates": [
+      38.698059,
+      9.035256
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Gabon",
+    "label": "Gabon",
+    "capital": "Libreville",
+    "englishCapital": "Libreville",
+    "code": "ga",
+    "capitalCoordinates": [
+      9.457965,
+      0.385389
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Gambia",
+    "label": "Gambia",
+    "capital": "Bandżul",
+    "englishCapital": "Banjul",
+    "code": "gm",
+    "capitalCoordinates": [
+      -16.591701,
+      13.453876
+    ],
+    "countryAliases": [
+      "The Gambia"
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Ghana",
+    "label": "Ghana",
+    "capital": "Akra",
+    "englishCapital": "Accra",
+    "code": "gh",
+    "capitalCoordinates": [
+      -0.218662,
+      5.55198
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Guinea",
+    "label": "Gwinea",
+    "capital": "Konakry",
+    "englishCapital": "Conakry",
+    "code": "gn",
+    "capitalCoordinates": [
+      -13.682181,
+      9.533469
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Guinea-Bissau",
+    "label": "Gwinea Bissau",
+    "capital": "Bissau",
+    "englishCapital": "Bissau",
+    "code": "gw",
+    "capitalCoordinates": [
+      -15.598361,
+      11.865024
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Kenya",
+    "label": "Kenia",
+    "capital": "Nairobi",
+    "englishCapital": "Nairobi",
+    "code": "ke",
+    "capitalCoordinates": [
+      36.814711,
+      -1.281401
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Lesotho",
+    "label": "Lesotho",
+    "capital": "Maseru",
+    "englishCapital": "Maseru",
+    "code": "ls",
+    "capitalCoordinates": [
+      27.483273,
+      -29.316674
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Liberia",
+    "label": "Liberia",
+    "capital": "Monrovia",
+    "englishCapital": "Monrovia",
+    "code": "lr",
+    "capitalCoordinates": [
+      -10.79966,
+      6.314582
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Libya",
+    "label": "Libia",
+    "capital": "Trypolis",
+    "englishCapital": "Tripoli",
+    "code": "ly",
+    "capitalCoordinates": [
+      13.180012,
+      32.8925
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Madagascar",
+    "label": "Madagaskar",
+    "capital": "Antananarywa",
+    "englishCapital": "Antananarivo",
+    "code": "mg",
+    "capitalCoordinates": [
+      47.514678,
+      -18.914691
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Malawi",
+    "label": "Malawi",
+    "capital": "Lilongwe",
+    "englishCapital": "Lilongwe",
+    "code": "mw",
+    "capitalCoordinates": [
+      33.783302,
+      -13.983295
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Mali",
+    "label": "Mali",
+    "capital": "Bamako",
+    "englishCapital": "Bamako",
+    "code": "ml",
+    "capitalCoordinates": [
+      -8.001985,
+      12.65196
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Mauritania",
+    "label": "Mauretania",
+    "capital": "Nawakszut",
+    "englishCapital": "Nouakchott",
+    "code": "mr",
+    "capitalCoordinates": [
+      -15.97534,
+      18.086427
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Mauritius",
+    "label": "Mauritius",
+    "capital": "Port Louis",
+    "englishCapital": "Port Louis",
+    "code": "mu",
+    "capitalCoordinates": [
+      57.499994,
+      -20.166639
+    ],
+    "mapMarker": true
+  },
+  {
+    "name": "Morocco",
+    "label": "Maroko",
+    "capital": "Rabat",
+    "englishCapital": "Rabat",
+    "code": "ma",
+    "capitalCoordinates": [
+      -6.836408,
+      34.025307
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Mozambique",
+    "label": "Mozambik",
+    "capital": "Maputo",
+    "englishCapital": "Maputo",
+    "code": "mz",
+    "capitalCoordinates": [
+      32.587217,
+      -25.953332
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Namibia",
+    "label": "Namibia",
+    "capital": "Windhuk",
+    "englishCapital": "Windhoek",
+    "code": "na",
+    "capitalCoordinates": [
+      17.083546,
+      -22.570006
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Niger",
+    "label": "Niger",
+    "capital": "Niamey",
+    "englishCapital": "Niamey",
+    "code": "ne",
+    "capitalCoordinates": [
+      7.096404,
+      13.491643
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Nigeria",
+    "label": "Nigeria",
+    "capital": "Abudża",
+    "englishCapital": "Abuja",
+    "code": "ng",
+    "capitalCoordinates": [
+      7.489505,
+      9.05462
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Rwanda",
+    "label": "Rwanda",
+    "capital": "Kigali",
+    "englishCapital": "Kigali",
+    "code": "rw",
+    "capitalCoordinates": [
+      30.058586,
+      -1.951644
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Sao Tome and Principe",
+    "label": "Wyspy Świętego Tomasza i Książęca",
+    "capital": "São Tomé",
+    "englishCapital": "São Tomé",
+    "code": "st",
+    "capitalCoordinates": [
+      6.72965,
+      0.337466
+    ],
+    "mapMarker": true
+  },
+  {
+    "name": "Senegal",
+    "label": "Senegal",
+    "capital": "Dakar",
+    "englishCapital": "Dakar",
+    "code": "sn",
+    "capitalCoordinates": [
+      -17.475076,
+      14.717778
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Seychelles",
+    "label": "Seszele",
+    "capital": "Victoria",
+    "englishCapital": "Victoria",
+    "code": "sc",
+    "capitalCoordinates": [
+      55.44999,
+      -4.616632
+    ],
+    "mapMarker": true
+  },
+  {
+    "name": "Sierra Leone",
+    "label": "Sierra Leone",
+    "capital": "Freetown",
+    "englishCapital": "Freetown",
+    "code": "sl",
+    "capitalCoordinates": [
+      -13.236162,
+      8.471957
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Somalia",
+    "label": "Somalia",
+    "capital": "Mogadiszu",
+    "englishCapital": "Mogadishu",
+    "code": "so",
+    "capitalCoordinates": [
+      45.364732,
+      2.068627
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "South Africa",
+    "label": "Republika Południowej Afryki",
+    "capital": "Pretoria",
+    "englishCapital": "Pretoria",
+    "code": "za",
+    "capitalCoordinates": [
+      28.227483,
+      -25.704975
+    ],
+    "countryAliases": [
+      "RPA"
+    ],
+    "notes": "Pretoria — administracyjna; Kapsztad — ustawodawcza; Bloemfontein — sądownicza.",
+    "capitalVariants": [
+      {
+        "capital": "Kapsztad",
+        "englishCapital": "Cape Town",
+        "capitalCoordinates": [
+          18.433042,
+          -33.918065
+        ]
+      },
+      {
+        "capital": "Bloemfontein",
+        "englishCapital": "Bloemfontein",
+        "capitalCoordinates": [
+          26.229913,
+          -29.119994
+        ]
+      }
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "South Sudan",
+    "label": "Sudan Południowy",
+    "capital": "Dżuba",
+    "englishCapital": "Juba",
+    "code": "ss",
+    "capitalCoordinates": [
+      31.580026,
+      4.829975
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Sudan",
+    "label": "Sudan",
+    "capital": "Chartum",
+    "englishCapital": "Khartoum",
+    "code": "sd",
+    "capitalCoordinates": [
+      32.532233,
+      15.590024
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Tanzania",
+    "label": "Tanzania",
+    "capital": "Dodoma",
+    "englishCapital": "Dodoma",
+    "code": "tz",
+    "capitalCoordinates": [
+      35.750004,
+      -6.183306
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Togo",
+    "label": "Togo",
+    "capital": "Lomé",
+    "englishCapital": "Lomé",
+    "code": "tg",
+    "capitalCoordinates": [
+      1.220811,
+      6.133883
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Tunisia",
+    "label": "Tunezja",
+    "capital": "Tunis",
+    "englishCapital": "Tunis",
+    "code": "tn",
+    "capitalCoordinates": [
+      10.179678,
+      36.802778
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Uganda",
+    "label": "Uganda",
+    "capital": "Kampala",
+    "englishCapital": "Kampala",
+    "code": "ug",
+    "capitalCoordinates": [
+      32.581378,
+      0.318605
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Zambia",
+    "label": "Zambia",
+    "capital": "Lusaka",
+    "englishCapital": "Lusaka",
+    "code": "zm",
+    "capitalCoordinates": [
+      28.281382,
+      -15.414698
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Zimbabwe",
+    "label": "Zimbabwe",
+    "capital": "Harare",
+    "englishCapital": "Harare",
+    "code": "zw",
+    "capitalCoordinates": [
+      31.042764,
+      -17.815844
+    ],
+    "mapMarker": false
+  }
+]

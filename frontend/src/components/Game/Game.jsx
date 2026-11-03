@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import countries from "../../data/countries.json";
+import { getRegion, getResultsPath, getStorageKey } from "../../data/regions";
 import shuffle, {
   isCorrect,
   findCountry,
   isCountryNamePrefix,
+  isCapitalNamePrefix,
 } from "../../utils/utils";
 import Shell from "../App/Shell";
 import ModeSwitch from "../App/ModeSwitch";
@@ -13,7 +14,9 @@ import Icon from "../App/Icon";
 import MapChart from "./MapChart";
 import Stopwatch from "./Stopwatch";
 
-export default function Game({ mode = "capitals" }) {
+export default function Game({ mode = "capitals", regionId = "europe" }) {
+  const region = getRegion(regionId);
+  const countries = region.countries;
   const isCountries = mode === "countries";
   const unit = isCountries ? "państw" : "stolic";
   const [queue, setQueue] = useState(() => shuffle(countries));
@@ -61,6 +64,7 @@ export default function Game({ mode = "capitals" }) {
     clearTimeout(answerTimer.current);
     const result = {
       mode,
+      regionId,
       answers: finalAnswers,
       seconds: startedAt.current
         ? Math.floor((Date.now() - startedAt.current) / 1000)
@@ -69,13 +73,13 @@ export default function Game({ mode = "capitals" }) {
     };
     try {
       sessionStorage.setItem(
-        isCountries ? "capitalrace-countries-result" : "capitalrace-result",
+        getStorageKey(regionId, mode),
         JSON.stringify(result),
       );
     } catch {
       /* Results still work when storage is unavailable. */
     }
-    navigate(isCountries ? "/countries/results" : "/results", {
+    navigate(getResultsPath(regionId, mode), {
       state: result,
     });
   }
@@ -103,7 +107,7 @@ export default function Game({ mode = "capitals" }) {
     clearTimeout(answerTimer.current);
     if (status === "playing") {
       if (isCountries) {
-        const country = findCountry(answer);
+        const country = findCountry(answer, countries);
         if (country) {
           const register = () => {
             if (answers.includes(country.name)) {
@@ -116,7 +120,7 @@ export default function Game({ mode = "capitals" }) {
               acceptAnswer(country);
             }
           };
-          if (isCountryNamePrefix(answer, country)) {
+          if (isCountryNamePrefix(answer, country, countries)) {
             // Give the player time to finish an alternative name, e.g. Cypr → Cyprus.
             setValue(answer);
             answerTimer.current = setTimeout(register, 300);
@@ -126,7 +130,12 @@ export default function Game({ mode = "capitals" }) {
           return;
         }
       } else if (isCorrect(answer, current)) {
-        acceptAnswer();
+        if (isCapitalNamePrefix(answer, current)) {
+          setValue(answer);
+          answerTimer.current = setTimeout(() => acceptAnswer(), 300);
+        } else {
+          acceptAnswer();
+        }
         return;
       }
     }
@@ -149,11 +158,18 @@ export default function Game({ mode = "capitals" }) {
   }
 
   return (
-    <Shell immersive onHelp={() => setDialog("help")}>
+    <Shell
+      immersive
+      regionId={regionId}
+      mode={mode}
+      onHelp={() => setDialog("help")}
+    >
       <section
         className="atlas-stage"
         aria-label={
-          isCountries ? "Gra w państwa Europy" : "Gra w stolice Europy"
+          isCountries
+            ? `Gra w państwa ${region.genitive}`
+            : `Gra w stolice ${region.genitive}`
         }
       >
         <div className="atlas-canvas">
@@ -162,19 +178,20 @@ export default function Game({ mode = "capitals" }) {
             results={answers}
             currentCountry={isCountries ? undefined : current.name}
             mode={mode}
+            regionId={regionId}
           />
         </div>
         <div className="atlas-heading">
-          <ModeSwitch />
+          <ModeSwitch regionId={regionId} />
           <h1>
-            Cała Europa.
+            {region.headline}
             <br />
             <em>Z pamięci.</em>
           </h1>
           <p>
             {isCountries
               ? "Wpisuj państwa. Wypełnij całą mapę."
-              : "45 krajów. Tyle miejsc do odkrycia."}
+              : `${countries.length} krajów. Tyle miejsc do odkrycia.`}
           </p>
         </div>
         <div className="atlas-stats">
@@ -211,12 +228,17 @@ export default function Game({ mode = "capitals" }) {
             <span style={{ width: `${progress}%` }} />
           </div>
         </div>
-        <span className="atlas-ocean" aria-hidden="true">
-          O C E A N<br />A T L A N T Y C K I
-        </span>
-        <span className="atlas-sea" aria-hidden="true">
-          M O R Z E &nbsp; Ś R Ó D Z I E M N E
-        </span>
+        {regionId === "europe" && (
+          <>
+            {" "}
+            <span className="atlas-ocean" aria-hidden="true">
+              O C E A N<br />A T L A N T Y C K I
+            </span>
+            <span className="atlas-sea" aria-hidden="true">
+              M O R Z E &nbsp; Ś R Ó D Z I E M N E
+            </span>
+          </>
+        )}
         <div className="atlas-compass" aria-hidden="true">
           <span>N</span>
           <svg width="24" height="38" viewBox="0 0 26 40">
@@ -269,11 +291,11 @@ export default function Game({ mode = "capitals" }) {
               ) : (
                 <CountryFlag country={current} />
               )}
-              <span>{isCountries ? "Wypełnij Europę" : current.label}</span>
+              <span>{isCountries ? "Wypełnij mapę" : current.label}</span>
             </h2>
             <span className="atlas-remaining">
-              <Icon name="pin" size={13} /> Europa <span>·</span> Pozostało{" "}
-              {queue.length}
+              <Icon name="pin" size={13} /> {region.label} <span>·</span>{" "}
+              Pozostało {queue.length}
             </span>
           </div>
           <div className="atlas-dock-answer">
@@ -399,15 +421,18 @@ export default function Game({ mode = "capitals" }) {
               </h2>
               <p>
                 {isCountries
-                  ? "Wymień wszystkie 45 państw z zestawu gry, w dowolnej kolejności. Każde odgadnięte państwo pokoloruje się na zielono. Nazwy nieodgadniętych państw pozostają ukryte."
-                  : "Odgadnij stolice 45 krajów z oryginalnego zestawu gry. Aktualny kraj znajdziesz na mapie w złotym kolorze."}
+                  ? `Wymień wszystkie państwa z wybranego zestawu (${countries.length}), w dowolnej kolejności. Każde odgadnięte państwo pokoloruje się na zielono. Nazwy nieodgadniętych państw pozostają ukryte.`
+                  : `Odgadnij stolice krajów z wybranego zestawu (${countries.length}). Aktualny kraj znajdziesz na mapie w złotym kolorze.`}
+              </p>
+              <p className="region-scope">
+                {region.label}: {region.scope}
               </p>
               <ol>
                 <li>Kliknij „Zaczynamy”, aby uruchomić czas.</li>
                 <li>
                   Przeciągaj mapę myszą lub palcem. Przybliżaj kółkiem, gestem
                   dwóch palców lub przyciskami + i − (od 1 do 4×). Przycisk
-                  widoku Europy przywraca pozycję początkową.
+                  widoku regionu przywraca pozycję początkową.
                 </li>
                 <li>
                   {isCountries

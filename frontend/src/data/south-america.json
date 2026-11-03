@@ -1,0 +1,157 @@
+[
+  {
+    "name": "Argentina",
+    "label": "Argentyna",
+    "capital": "Buenos Aires",
+    "englishCapital": "Buenos Aires",
+    "code": "ar",
+    "capitalCoordinates": [
+      -58.432513,
+      -34.610715
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Bolivia",
+    "label": "Boliwia",
+    "capital": "Sucre",
+    "englishCapital": "Sucre",
+    "code": "bo",
+    "capitalCoordinates": [
+      -65.259516,
+      -19.040971
+    ],
+    "notes": "Sucre — konstytucyjna; La Paz — siedziba rządu.",
+    "capitalVariants": [
+      {
+        "capital": "La Paz",
+        "englishCapital": "La Paz",
+        "capitalCoordinates": [
+          -68.151931,
+          -16.496028
+        ]
+      }
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Brazil",
+    "label": "Brazylia",
+    "capital": "Brasília",
+    "englishCapital": "Brasília",
+    "code": "br",
+    "capitalCoordinates": [
+      -47.917998,
+      -15.781394
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Chile",
+    "label": "Chile",
+    "capital": "Santiago",
+    "englishCapital": "Santiago",
+    "code": "cl",
+    "capitalCoordinates": [
+      -70.650504,
+      -33.440205
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Colombia",
+    "label": "Kolumbia",
+    "capital": "Bogota",
+    "englishCapital": "Bogotá",
+    "code": "co",
+    "capitalCoordinates": [
+      -74.08529,
+      4.598369
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Ecuador",
+    "label": "Ekwador",
+    "capital": "Quito",
+    "englishCapital": "Quito",
+    "code": "ec",
+    "capitalCoordinates": [
+      -78.501997,
+      -0.213042
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Guyana",
+    "label": "Gujana",
+    "capital": "Georgetown",
+    "englishCapital": "Georgetown",
+    "code": "gy",
+    "capitalCoordinates": [
+      -58.167029,
+      6.801974
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Paraguay",
+    "label": "Paragwaj",
+    "capital": "Asunción",
+    "englishCapital": "Asunción",
+    "code": "py",
+    "capitalCoordinates": [
+      -57.625834,
+      -25.290671
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Peru",
+    "label": "Peru",
+    "capital": "Lima",
+    "englishCapital": "Lima",
+    "code": "pe",
+    "capitalCoordinates": [
+      -77.052008,
+      -12.046067
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Suriname",
+    "label": "Surinam",
+    "capital": "Paramaribo",
+    "englishCapital": "Paramaribo",
+    "code": "sr",
+    "capitalCoordinates": [
+      -55.167031,
+      5.83503
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Uruguay",
+    "label": "Urugwaj",
+    "capital": "Montevideo",
+    "englishCapital": "Montevideo",
+    "code": "uy",
+    "capitalCoordinates": [
+      -56.186823,
+      -34.905376
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Venezuela",
+    "label": "Wenezuela",
+    "capital": "Caracas",
+    "englishCapital": "Caracas",
+    "code": "ve",
+    "capitalCoordinates": [
+      -66.918983,
+      10.502944
+    ],
+    "mapMarker": false
+  }
+]

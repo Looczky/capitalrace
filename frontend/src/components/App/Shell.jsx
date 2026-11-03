@@ -1,7 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Icon from "./Icon";
-export default function Shell({ children, onHelp, immersive = false }) {
+import RegionSelect from "./RegionSelect";
+import { getRegion } from "../../data/regions";
+export default function Shell({
+  children,
+  onHelp,
+  immersive = false,
+  regionId = "europe",
+  mode = "capitals",
+}) {
+  const region = getRegion(regionId);
   return (
     <div className={`app-shell${immersive ? " atlas-shell" : ""}`}>
       <header className="site-header">
@@ -13,12 +22,15 @@ export default function Shell({ children, onHelp, immersive = false }) {
           <span className="brand-dot">.</span>
         </Link>
         <nav aria-label="Nawigacja">
-          <span className="region">
-            <span /> EUROPA
-          </span>
+          <RegionSelect regionId={regionId} mode={mode} />
           {onHelp && (
-            <button className="help-button" onClick={onHelp}>
-              <Icon name="info" size={17} /> Jak grać
+            <button
+              className="help-button"
+              aria-label="Jak grać"
+              onClick={onHelp}
+            >
+              <Icon name="info" size={17} />{" "}
+              <span className="help-label">Jak grać</span>
             </button>
           )}
         </nav>
@@ -27,7 +39,9 @@ export default function Shell({ children, onHelp, immersive = false }) {
       {!immersive && (
         <footer className="site-footer">
           <span>Małe wyzwanie. Wielka podróż.</span>
-          <span>45 krajów · Jeden kontynent · Twoja wiedza</span>
+          <span>
+            {region.countries.length} państw · {region.label} · Twoja wiedza
+          </span>
           <span>
             Odkrywaj. Zapamiętuj. Powtarzaj. <Icon name="globe" size={15} />
           </span>

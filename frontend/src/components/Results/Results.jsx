@@ -5,23 +5,18 @@ import ModeSwitch from "../App/ModeSwitch";
 import CountryFlag from "../App/CountryFlag";
 import Icon from "../App/Icon";
 import MapChart from "../Game/MapChart";
-import countries from "../../data/countries.json";
+import { getRegion, getGamePath, getStorageKey } from "../../data/regions";
 import { formatTime } from "../../utils/utils";
 
-function loadResult(state, mode) {
+function loadResult(state, mode, regionId, countries) {
   try {
     const result =
       state ||
-      JSON.parse(
-        sessionStorage.getItem(
-          mode === "countries"
-            ? "capitalrace-countries-result"
-            : "capitalrace-result",
-        ),
-      );
+      JSON.parse(sessionStorage.getItem(getStorageKey(regionId, mode)));
     if (
       !result ||
       (result.mode || "capitals") !== mode ||
+      (result.regionId || "europe") !== regionId ||
       !Array.isArray(result.answers) ||
       !Number.isFinite(result.seconds) ||
       result.seconds < 0
@@ -41,15 +36,17 @@ function loadResult(state, mode) {
     return null;
   }
 }
-export default function Results({ mode = "capitals" }) {
+export default function Results({ mode = "capitals", regionId = "europe" }) {
+  const region = getRegion(regionId);
+  const countries = region.countries;
   const isCountries = mode === "countries";
-  const gamePath = isCountries ? "/countries" : "/";
+  const gamePath = getGamePath(regionId, mode);
   const { state } = useLocation();
-  const [result] = useState(() => loadResult(state, mode));
+  const [result] = useState(() => loadResult(state, mode, regionId, countries));
   const [filter, setFilter] = useState("all");
   if (!result)
     return (
-      <Shell>
+      <Shell regionId={regionId} mode={mode}>
         <section className="empty-results">
           <Icon name="globe" size={48} />
           <h1>Twoja podróż dopiero się zaczyna.</h1>
@@ -69,16 +66,16 @@ export default function Results({ mode = "capitals" }) {
         : !result.answers.includes(c.name)),
   );
   return (
-    <Shell>
+    <Shell regionId={regionId} mode={mode}>
       <section className="intro">
         <div>
-          <ModeSwitch />
+          <ModeSwitch regionId={regionId} />
           <p className="eyebrow">
             <span className="tiny-line" /> TWOJA PODRÓŻ W LICZBACH
           </p>
           <h1>
             {count === countries.length
-              ? "Cała Europa jest Twoja."
+              ? region.winTitle
               : "Każda podróż czegoś uczy."}
           </h1>
           <p className="intro-description">
@@ -100,7 +97,7 @@ export default function Results({ mode = "capitals" }) {
             {Math.round((count / countries.length) * 100)}
             <small>%</small>
           </strong>
-          <p>Europy w Twojej pamięci</p>
+          <p>{region.label} w Twojej pamięci</p>
           <div className="result-numbers">
             <span>
               <Icon name="check" />{" "}
@@ -115,7 +112,12 @@ export default function Results({ mode = "capitals" }) {
           </div>
         </div>
         <div className="result-map">
-          <MapChart results={result.answers} gameRunning={false} mode={mode} />
+          <MapChart
+            results={result.answers}
+            gameRunning={false}
+            mode={mode}
+            regionId={regionId}
+          />
         </div>
       </section>
       <section className="answers-section">
@@ -168,7 +170,19 @@ export default function Results({ mode = "capitals" }) {
                       : country.label}
                   </span>
                 </span>
-                <strong>{isCountries ? country.label : country.capital}</strong>
+                <strong>
+                  {isCountries
+                    ? country.label
+                    : [
+                        country.capital,
+                        ...(country.capitalVariants || []).map(
+                          (variant) => variant.capital,
+                        ),
+                      ].join(" / ")}
+                </strong>
+                {!isCountries && country.notes && (
+                  <small className="answer-notes">{country.notes}</small>
+                )}
               </span>
             </div>
           ))}

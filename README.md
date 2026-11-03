@@ -1,6 +1,6 @@
 # Capitalrace
 
-Dwie minigry geograficzne na mapie Europy: stolice i państwa. Polski interfejs, mapa postępu i osobne podsumowania z odpowiedziami do powtórki.
+Dwie minigry geograficzne na mapach świata: stolice i państwa. Polski interfejs, mapa postępu i osobne podsumowania z odpowiedziami do powtórki.
 
 ## Uruchomienie
 
@@ -12,7 +12,7 @@ npm ci
 npm start
 ```
 
-Otwórz http://localhost:3000. Gra korzysta z lokalnego zestawu danych i mapy, więc backend ani baza danych nie są wymagane. Fonty Google są opcjonalne — w razie braku sieci używany jest font systemowy.
+Otwórz http://localhost:3000. Gra korzysta z lokalnych zestawów danych i map, więc backend ani baza danych nie są wymagane. Fonty Google są opcjonalne — w razie braku sieci używany jest font systemowy.
 
 ## Zasady
 
@@ -23,7 +23,7 @@ Otwórz http://localhost:3000. Gra korzysta z lokalnego zestawu danych i mapy, w
 - Czerwony przycisk **Zakończ grę** otwiera potwierdzenie. Wybierz **Gram dalej**, aby wrócić do rundy, albo **Tak, zakończ grę**, aby zobaczyć wynik i pełny atlas odpowiedzi — także bez żadnej poprawnej odpowiedzi.
 - Po odgadnięciu wszystkich stolic albo zakończeniu rundy zobaczysz wynik i pełny atlas odpowiedzi. Wynik jest przechowywany w obrębie bieżącej sesji przeglądarki, również po odświeżeniu strony.
 
-Zestaw zachowuje 45 krajów z oryginalnej gry. Dane i polskie nazwy znajdują się w `frontend/src/data/countries.json`; pole `name` odpowiada nazwom na mapie, `label` jest nazwą wyświetlaną, a `capital` i `englishCapital` są akceptowanymi odpowiedziami. Opcjonalne `aliases` pozwala dodać kolejne warianty.
+Zestaw Europy zachowuje 45 krajów z oryginalnej gry. Dane i polskie nazwy znajdują się w `frontend/src/data/countries.json`; pole `name` odpowiada nazwom na mapie, `label` jest nazwą wyświetlaną, a `capital` i `englishCapital` są akceptowanymi odpowiedziami. Opcjonalne `aliases` pozwala dodać kolejne warianty.
 
 ## Testy i build
 
@@ -66,3 +66,23 @@ Wybierz **Państwa** w przełączniku minigier lub otwórz `/countries`. Wpisuj 
 - Przed odgadnięciem mapa nie zdradza nazwy kraju w podpowiedziach. Ten tryb nie wskazuje wybranego kraju ani nie pokazuje nazw stolic.
 - Wyniki państw są na `/countries/results`, zapisywane osobno od wyników stolic i zachowywane po odświeżeniu.
 - Przełączenie minigry rozpoczyna nową rundę wybranego trybu.
+
+## Regiony w obu minigrach
+
+Wybierz region w nagłówku. Przełącznik **Stolice / Państwa** zachowuje wybrany region. Zmiana regionu rozpoczyna nową rundę wybranej minigry. Wyniki dziesięciu kombinacji regionu i minigry są przechowywane oddzielnie; starsze wyniki Europy pozostają obsługiwane.
+
+| Region | Liczba państw | Stolice | Państwa |
+| --- | ---: | --- | --- |
+| Europa | 45 | `/` | `/countries` |
+| Azja | 47 | `/play/asia` | `/play/asia/countries` |
+| Afryka | 54 | `/play/africa` | `/play/africa/countries` |
+| Ameryka Północna | 23 | `/play/north-america` | `/play/north-america/countries` |
+| Ameryka Południowa | 12 | `/play/south-america` | `/play/south-america/countries` |
+
+Zestaw Ameryki Północnej obejmuje Amerykę Środkową i Karaiby. Nowe zestawy obejmują państwa członkowskie ONZ oraz Palestynę; nie obejmują terytoriów zależnych. Rosja i Cypr pozostają w oryginalnym zestawie Europy i nie są powielane w Azji. Przyjęty podział jest opisany również w pomocy gry.
+
+Dane regionalne znajdują się w `frontend/src/data/`, konfiguracja w `regions.js`, a mapy nowych regionów w `frontend/public/maps/`. Pozycje małych państw wyspiarskich są dodatkowo oznaczane punktami, aby można było dostrzec ich postęp. Przed odgadnięciem nie są ujawniane nazwy państw ani stolic.
+
+Dla nazw, które są początkiem dłuższej odpowiedzi (np. Niger → Nigeria, Gwinea → Gwinea Bissau, Sana → Sanaa), gra krótko czeka na dokończenie wpisywania. Stolice wielofunkcyjne mają akceptowane warianty i objaśnienia na ekranie wyników; po odgadnięciu kraju w grze w stolice można zobaczyć te miasta na mapie od 2×.
+
+Źródła, szczegóły aktualizacji stolic i zasady danych: [docs/data-sources.md](docs/data-sources.md).

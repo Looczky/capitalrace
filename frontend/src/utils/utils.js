@@ -16,13 +16,33 @@ export function normalize(value) {
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/ł/g, "l")
+    .replace(/[’'.,]/g, "")
+    .replace(/[-‐‑–]/g, " ")
     .replace(/\s+/g, " ");
 }
 
+const capitalNames = (country) =>
+  [
+    country.capital,
+    country.englishCapital,
+    ...(country.aliases || []),
+    ...(country.capitalVariants || []).flatMap((variant) => [
+      variant.capital,
+      variant.englishCapital,
+      ...(variant.aliases || []),
+    ]),
+  ].filter(Boolean);
 export function isCorrect(answer, country) {
-  return [country.capital, country.englishCapital, ...(country.aliases || [])]
-    .filter(Boolean)
-    .some((value) => normalize(value) === normalize(answer));
+  return capitalNames(country).some(
+    (value) => normalize(value) === normalize(answer),
+  );
+}
+export function isCapitalNamePrefix(answer, country) {
+  const normalized = normalize(answer);
+  return capitalNames(country).some(
+    (name) =>
+      normalize(name) !== normalized && normalize(name).startsWith(normalized),
+  );
 }
 
 export function formatTime(seconds) {
@@ -40,20 +60,25 @@ const countryNames = (country) => [
   country.label,
   country.name,
   ...(countryAliases[country.name] || []),
+  ...(country.countryAliases || []),
 ];
 
-export function findCountry(answer) {
+export function findCountry(answer, pool = countries) {
   const normalized = normalize(answer);
   if (!normalized) return undefined;
-  return countries.find((country) =>
+  return pool.find((country) =>
     countryNames(country).some((name) => normalize(name) === normalized),
   );
 }
 
-export function isCountryNamePrefix(answer, country) {
+export function isCountryNamePrefix(answer, country, pool = countries) {
   const normalized = normalize(answer);
-  return countryNames(country).some(
-    (name) =>
-      normalize(name) !== normalized && normalize(name).startsWith(normalized),
+  // A valid country can prefix another one: Niger → Nigeria, Guinea → Guinea-Bissau.
+  return [...pool, country].some((item) =>
+    countryNames(item).some(
+      (name) =>
+        normalize(name) !== normalized &&
+        normalize(name).startsWith(normalized),
+    ),
   );
 }

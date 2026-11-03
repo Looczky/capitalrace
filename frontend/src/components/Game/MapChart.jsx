@@ -6,13 +6,13 @@ import {
   Marker,
   ZoomableGroup,
 } from "react-simple-maps";
-import countries from "../../data/countries.json";
+import { getRegion } from "../../data/regions";
 import Icon from "../App/Icon";
 import CapitalMarkers from "./CapitalMarkers";
 
 const MIN_ZOOM = 1;
 const MAX_ZOOM = 4;
-const HOME = [17, 54];
+
 const mapName = (name) =>
   name === "Holy See (Vatican City)" ? "Vatican City" : name;
 const smallCountries = [
@@ -32,7 +32,25 @@ export default function MapChart({
   gameRunning = true,
   interactive = false,
   mode = "capitals",
+  regionId = "europe",
 }) {
+  const region = getRegion(regionId);
+  const countries = region.countries;
+  const HOME = region.layout?.cameraCenter || region.center;
+  const scaleFor = (width, height) =>
+    region.layout
+      ? Math.min(
+          width / (region.layout.width * 1.12),
+          height / (region.layout.height * 1.12),
+        )
+      : Math.min(width * region.scale[0], height * region.scale[1]);
+  const staticScale = regionId === "europe" ? 685 : scaleFor(800, 680);
+  const markers =
+    regionId === "europe"
+      ? smallCountries
+      : countries
+          .filter((country) => country.mapMarker)
+          .map((country) => [country.name, ...country.capitalCoordinates]);
   const isCountries = mode === "countries";
   const labelFor = (name) =>
     isCountries && gameRunning && !results.includes(name)
@@ -72,12 +90,18 @@ export default function MapChart({
       ...previous,
       coordinates: [
         Math.max(
-          -35,
-          Math.min(70, previous.coordinates[0] + dx / previous.zoom),
+          region.bounds[0],
+          Math.min(
+            region.bounds[2],
+            previous.coordinates[0] + dx / previous.zoom,
+          ),
         ),
         Math.max(
-          25,
-          Math.min(75, previous.coordinates[1] + dy / previous.zoom),
+          region.bounds[1],
+          Math.min(
+            region.bounds[3],
+            previous.coordinates[1] + dy / previous.zoom,
+          ),
         ),
       ],
     }));
@@ -122,7 +146,7 @@ export default function MapChart({
           : "#e6ebdf";
   const features = (
     <>
-      <Geographies geography={`${process.env.PUBLIC_URL}/europe.topojson`}>
+      <Geographies geography={`${process.env.PUBLIC_URL}${region.map}`}>
         {({ geographies }) =>
           geographies.map((geo) => (
             <Geography
@@ -144,7 +168,7 @@ export default function MapChart({
           ))
         }
       </Geographies>
-      {smallCountries.map(([name, x, y]) => (
+      {markers.map(([name, x, y]) => (
         <Marker key={name} coordinates={[x, y]}>
           <circle
             r={3.5 / (interactive ? position.zoom : 1)}
@@ -163,13 +187,24 @@ export default function MapChart({
     return (
       <ComposableMap
         projection="geoAzimuthalEqualArea"
-        projectionConfig={{ rotate: [-17, -54, 0], scale: 685 }}
+        projectionConfig={{
+          rotate: [-region.center[0], -region.center[1], 0],
+          scale: staticScale,
+        }}
         width={800}
         height={680}
         role="img"
-        aria-label="Mapa Europy. Zielony kolor oznacza poprawne odpowiedzi."
+        aria-label={`Mapa ${region.genitive}. Zielony kolor oznacza poprawne odpowiedzi.`}
       >
-        {features}
+        <g
+          transform={
+            region.layout
+              ? `translate(${-region.layout.offset[0] * staticScale} ${-region.layout.offset[1] * staticScale})`
+              : undefined
+          }
+        >
+          {features}
+        </g>
       </ComposableMap>
     );
   return (
@@ -177,7 +212,7 @@ export default function MapChart({
       <div
         className="map-surface"
         role="region"
-        aria-label="Interaktywna mapa Europy"
+        aria-label={`Interaktywna mapa ${region.genitive}`}
         aria-describedby="map-instructions"
         tabIndex={0}
         onKeyDown={handleKeyDown}
@@ -185,8 +220,8 @@ export default function MapChart({
         <ComposableMap
           projection="geoAzimuthalEqualArea"
           projectionConfig={{
-            rotate: [-17, -54, 0],
-            scale: Math.min(size.width * 1.15, size.height * 1.2),
+            rotate: [-region.center[0], -region.center[1], 0],
+            scale: scaleFor(size.width, size.height),
           }}
           width={size.width}
           height={size.height}
@@ -197,6 +232,7 @@ export default function MapChart({
           }
         >
           <ZoomableGroup
+            key={`${size.width}-${size.height}`}
             center={position.coordinates}
             zoom={position.zoom}
             minZoom={MIN_ZOOM}
@@ -209,7 +245,9 @@ export default function MapChart({
             filterZoomEvent={filterZoomEvent}
           >
             {features}
-            {!isCountries && <CapitalMarkers results={results} />}
+            {!isCountries && (
+              <CapitalMarkers results={results} countries={countries} />
+            )}
           </ZoomableGroup>
         </ComposableMap>
       </div>
@@ -239,8 +277,8 @@ export default function MapChart({
         </button>
         <span className="map-control-divider" />
         <button
-          aria-label="Pokaż całą Europę"
-          title="Pokaż całą Europę (Home)"
+          aria-label={region.resetLabel}
+          title={`${region.resetLabel} (Home)`}
           onClick={reset}
         >
           <Icon name="frame" />
@@ -249,7 +287,7 @@ export default function MapChart({
       <p id="map-instructions" className="sr-only">
         Przeciągnij mapę, aby ją przesunąć. Przybliżaj kółkiem myszy lub dwoma
         palcami. Zakres od 1 do 4 razy. Z klawiatury: strzałki przesuwają, plus
-        i minus zmieniają powiększenie, Home przywraca widok Europy.
+        i minus zmieniają powiększenie, Home przywraca widok regionu.
       </p>
     </div>
   );

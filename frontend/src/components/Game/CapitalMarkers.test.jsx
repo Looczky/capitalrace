@@ -55,3 +55,23 @@ test("adding a correct answer reveals its marker without changing zoom", () => {
     "scale(0.25)",
   );
 });
+
+test("uses regional countries and reveals all accepted capital locations only after guessing", () => {
+  const africa = require("../../data/africa.json");
+  useZoomPanContext.mockReturnValue({ k: 3 });
+  const { rerender } = render(
+    <svg>
+      <CapitalMarkers results={[]} countries={africa} />
+    </svg>,
+  );
+  expect(screen.queryByText("Pretoria")).not.toBeInTheDocument();
+  rerender(
+    <svg>
+      <CapitalMarkers results={["South Africa"]} countries={africa} />
+    </svg>,
+  );
+  expect(screen.getByText("Pretoria")).toBeInTheDocument();
+  expect(screen.getByText("Kapsztad")).toBeInTheDocument();
+  expect(screen.getByText("Bloemfontein")).toBeInTheDocument();
+  expect(screen.queryByText("Kair")).not.toBeInTheDocument();
+});

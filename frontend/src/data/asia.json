@@ -1,0 +1,623 @@
+[
+  {
+    "name": "Afghanistan",
+    "label": "Afganistan",
+    "capital": "Kabul",
+    "englishCapital": "Kabul",
+    "code": "af",
+    "capitalCoordinates": [
+      69.181314,
+      34.518636
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Armenia",
+    "label": "Armenia",
+    "capital": "Erywań",
+    "englishCapital": "Yerevan",
+    "code": "am",
+    "capitalCoordinates": [
+      44.511606,
+      40.183097
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Azerbaijan",
+    "label": "Azerbejdżan",
+    "capital": "Baku",
+    "englishCapital": "Baku",
+    "code": "az",
+    "capitalCoordinates": [
+      49.860271,
+      40.397218
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Bahrain",
+    "label": "Bahrajn",
+    "capital": "Manama",
+    "englishCapital": "Manama",
+    "code": "bh",
+    "capitalCoordinates": [
+      50.583052,
+      26.236136
+    ],
+    "mapMarker": true
+  },
+  {
+    "name": "Bangladesh",
+    "label": "Bangladesz",
+    "capital": "Dhaka",
+    "englishCapital": "Dhaka",
+    "code": "bd",
+    "capitalCoordinates": [
+      90.406634,
+      23.725006
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Bhutan",
+    "label": "Bhutan",
+    "capital": "Thimphu",
+    "englishCapital": "Thimphu",
+    "code": "bt",
+    "capitalCoordinates": [
+      89.639014,
+      27.472986
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Brunei",
+    "label": "Brunei",
+    "capital": "Bandar Seri Begawan",
+    "englishCapital": "Bandar Seri Begawan",
+    "code": "bn",
+    "capitalCoordinates": [
+      114.933284,
+      4.883331
+    ],
+    "mapMarker": true
+  },
+  {
+    "name": "Cambodia",
+    "label": "Kambodża",
+    "capital": "Phnom Penh",
+    "englishCapital": "Phnom Penh",
+    "code": "kh",
+    "capitalCoordinates": [
+      104.914689,
+      11.551976
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "China",
+    "label": "Chiny",
+    "capital": "Pekin",
+    "englishCapital": "Beijing",
+    "code": "cn",
+    "capitalCoordinates": [
+      116.394201,
+      39.90172
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Georgia",
+    "label": "Gruzja",
+    "capital": "Tbilisi",
+    "englishCapital": "Tbilisi",
+    "code": "ge",
+    "capitalCoordinates": [
+      44.78885,
+      41.726956
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "India",
+    "label": "Indie",
+    "capital": "Nowe Delhi",
+    "englishCapital": "New Delhi",
+    "code": "in",
+    "capitalCoordinates": [
+      77.19998,
+      28.600023
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Indonesia",
+    "label": "Indonezja",
+    "capital": "Dżakarta",
+    "englishCapital": "Jakarta",
+    "code": "id",
+    "capitalCoordinates": [
+      106.827492,
+      -6.172472
+    ],
+    "notes": "Dżakarta; budowa nowej stolicy Nusantara trwa.",
+    "mapMarker": false
+  },
+  {
+    "name": "Iran",
+    "label": "Iran",
+    "capital": "Teheran",
+    "englishCapital": "Tehran",
+    "code": "ir",
+    "capitalCoordinates": [
+      51.422398,
+      35.673889
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Iraq",
+    "label": "Irak",
+    "capital": "Bagdad",
+    "englishCapital": "Baghdad",
+    "code": "iq",
+    "capitalCoordinates": [
+      44.391923,
+      33.340594
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Israel",
+    "label": "Izrael",
+    "capital": "Jerozolima",
+    "englishCapital": "Jerusalem",
+    "code": "il",
+    "capitalCoordinates": [
+      35.206626,
+      31.778408
+    ],
+    "notes": "Jerozolima — stolica według prawa Izraela; jej status międzynarodowy jest sporny.",
+    "mapMarker": false
+  },
+  {
+    "name": "Japan",
+    "label": "Japonia",
+    "capital": "Tokio",
+    "englishCapital": "Tokyo",
+    "code": "jp",
+    "capitalCoordinates": [
+      139.749462,
+      35.686963
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Jordan",
+    "label": "Jordania",
+    "capital": "Amman",
+    "englishCapital": "Amman",
+    "code": "jo",
+    "capitalCoordinates": [
+      35.931354,
+      31.951971
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Kazakhstan",
+    "label": "Kazachstan",
+    "capital": "Astana",
+    "englishCapital": "Astana",
+    "code": "kz",
+    "capitalCoordinates": [
+      71.427774,
+      51.181125
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Kuwait",
+    "label": "Kuwejt",
+    "capital": "Kuwejt",
+    "englishCapital": "Kuwait City",
+    "code": "kw",
+    "capitalCoordinates": [
+      47.976355,
+      29.371664
+    ],
+    "aliases": [
+      "Kuwait"
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Kyrgyzstan",
+    "label": "Kirgistan",
+    "capital": "Biszkek",
+    "englishCapital": "Bishkek",
+    "code": "kg",
+    "capitalCoordinates": [
+      74.583258,
+      42.875025
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Laos",
+    "label": "Laos",
+    "capital": "Wientian",
+    "englishCapital": "Vientiane",
+    "code": "la",
+    "capitalCoordinates": [
+      102.59998,
+      17.966693
+    ],
+    "countryAliases": [
+      "Lao PDR"
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Lebanon",
+    "label": "Liban",
+    "capital": "Bejrut",
+    "englishCapital": "Beirut",
+    "code": "lb",
+    "capitalCoordinates": [
+      35.507762,
+      33.873921
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Malaysia",
+    "label": "Malezja",
+    "capital": "Kuala Lumpur",
+    "englishCapital": "Kuala Lumpur",
+    "code": "my",
+    "capitalCoordinates": [
+      101.688699,
+      3.139797
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Maldives",
+    "label": "Malediwy",
+    "capital": "Male",
+    "englishCapital": "Malé",
+    "code": "mv",
+    "capitalCoordinates": [
+      73.508901,
+      4.172037
+    ],
+    "mapMarker": true
+  },
+  {
+    "name": "Mongolia",
+    "label": "Mongolia",
+    "capital": "Ułan Bator",
+    "englishCapital": "Ulaanbaatar",
+    "code": "mn",
+    "capitalCoordinates": [
+      106.91467,
+      47.918619
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Myanmar",
+    "label": "Mjanma",
+    "capital": "Naypyidaw",
+    "englishCapital": "Naypyidaw",
+    "code": "mm",
+    "capitalCoordinates": [
+      96.116673,
+      19.768503
+    ],
+    "aliases": [
+      "Nay Pyi Taw",
+      "Naypyitaw"
+    ],
+    "countryAliases": [
+      "Birma",
+      "Burma"
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Nepal",
+    "label": "Nepal",
+    "capital": "Katmandu",
+    "englishCapital": "Kathmandu",
+    "code": "np",
+    "capitalCoordinates": [
+      85.314696,
+      27.718638
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "North Korea",
+    "label": "Korea Północna",
+    "capital": "Pjongjang",
+    "englishCapital": "Pyongyang",
+    "code": "kp",
+    "capitalCoordinates": [
+      125.752745,
+      39.021385
+    ],
+    "aliases": [
+      "Phenian"
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Oman",
+    "label": "Oman",
+    "capital": "Maskat",
+    "englishCapital": "Muscat",
+    "code": "om",
+    "capitalCoordinates": [
+      58.378311,
+      23.585179
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Pakistan",
+    "label": "Pakistan",
+    "capital": "Islamabad",
+    "englishCapital": "Islamabad",
+    "code": "pk",
+    "capitalCoordinates": [
+      73.08063,
+      33.689368
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Palestine",
+    "label": "Palestyna",
+    "capital": "Jerozolima Wschodnia",
+    "englishCapital": "East Jerusalem",
+    "code": "ps",
+    "capitalCoordinates": [
+      35.235,
+      31.783
+    ],
+    "notes": "Jerozolima Wschodnia — deklarowana stolica; Ramallah — siedziba administracji.",
+    "capitalVariants": [
+      {
+        "capital": "Ramallah",
+        "englishCapital": "Ramallah",
+        "capitalCoordinates": [
+          35.206209,
+          31.902945
+        ]
+      }
+    ],
+    "mapMarker": true
+  },
+  {
+    "name": "Philippines",
+    "label": "Filipiny",
+    "capital": "Manila",
+    "englishCapital": "Manila",
+    "code": "ph",
+    "capitalCoordinates": [
+      120.980271,
+      14.606105
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Qatar",
+    "label": "Katar",
+    "capital": "Doha",
+    "englishCapital": "Doha",
+    "code": "qa",
+    "capitalCoordinates": [
+      51.532968,
+      25.286556
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Saudi Arabia",
+    "label": "Arabia Saudyjska",
+    "capital": "Rijad",
+    "englishCapital": "Riyadh",
+    "code": "sa",
+    "capitalCoordinates": [
+      46.720487,
+      24.634497
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Singapore",
+    "label": "Singapur",
+    "capital": "Singapur",
+    "englishCapital": "Singapore",
+    "code": "sg",
+    "capitalCoordinates": [
+      103.853875,
+      1.294979
+    ],
+    "mapMarker": true
+  },
+  {
+    "name": "South Korea",
+    "label": "Korea Południowa",
+    "capital": "Seul",
+    "englishCapital": "Seoul",
+    "code": "kr",
+    "capitalCoordinates": [
+      126.997785,
+      37.568295
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Sri Lanka",
+    "label": "Sri Lanka",
+    "capital": "Sri Dźajawardanapura Kotte",
+    "englishCapital": "Sri Jayawardenepura Kotte",
+    "code": "lk",
+    "capitalCoordinates": [
+      79.9028,
+      6.8941
+    ],
+    "aliases": [
+      "Sri Jayewardenepura Kotte",
+      "Sri Dżajawardanapura Kotte",
+      "Kotte"
+    ],
+    "notes": "Sri Dźajawardanapura Kotte — stolica; Kolombo pełni również funkcje rządowe.",
+    "capitalVariants": [
+      {
+        "capital": "Kolombo",
+        "englishCapital": "Colombo",
+        "capitalCoordinates": [
+          79.857751,
+          6.931966
+        ]
+      }
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Syria",
+    "label": "Syria",
+    "capital": "Damaszek",
+    "englishCapital": "Damascus",
+    "code": "sy",
+    "capitalCoordinates": [
+      36.29805,
+      33.50198
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Tajikistan",
+    "label": "Tadżykistan",
+    "capital": "Duszanbe",
+    "englishCapital": "Dushanbe",
+    "code": "tj",
+    "capitalCoordinates": [
+      68.773879,
+      38.560035
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Thailand",
+    "label": "Tajlandia",
+    "capital": "Bangkok",
+    "englishCapital": "Bangkok",
+    "code": "th",
+    "capitalCoordinates": [
+      100.514699,
+      13.751945
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Timor-Leste",
+    "label": "Timor Wschodni",
+    "capital": "Dili",
+    "englishCapital": "Dili",
+    "code": "tl",
+    "capitalCoordinates": [
+      125.579456,
+      -8.559388
+    ],
+    "countryAliases": [
+      "East Timor"
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Turkey",
+    "label": "Turcja",
+    "capital": "Ankara",
+    "englishCapital": "Ankara",
+    "code": "tr",
+    "capitalCoordinates": [
+      32.862446,
+      39.929184
+    ],
+    "countryAliases": [
+      "Türkiye",
+      "Turkiye"
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Turkmenistan",
+    "label": "Turkmenistan",
+    "capital": "Aszchabad",
+    "englishCapital": "Ashgabat",
+    "code": "tm",
+    "capitalCoordinates": [
+      58.383299,
+      37.949995
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "United Arab Emirates",
+    "label": "Zjednoczone Emiraty Arabskie",
+    "capital": "Abu Zabi",
+    "englishCapital": "Abu Dhabi",
+    "code": "ae",
+    "capitalCoordinates": [
+      54.366593,
+      24.466684
+    ],
+    "countryAliases": [
+      "ZEA",
+      "UAE"
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Uzbekistan",
+    "label": "Uzbekistan",
+    "capital": "Taszkent",
+    "englishCapital": "Tashkent",
+    "code": "uz",
+    "capitalCoordinates": [
+      69.268823,
+      41.303828
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Vietnam",
+    "label": "Wietnam",
+    "capital": "Hanoi",
+    "englishCapital": "Hanoi",
+    "code": "vn",
+    "capitalCoordinates": [
+      105.848068,
+      21.035273
+    ],
+    "mapMarker": false
+  },
+  {
+    "name": "Yemen",
+    "label": "Jemen",
+    "capital": "Sana",
+    "englishCapital": "Sanaa",
+    "code": "ye",
+    "capitalCoordinates": [
+      44.204648,
+      15.356679
+    ],
+    "mapMarker": false
+  }
+]
