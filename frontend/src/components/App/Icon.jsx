@@ -1,5 +1,18 @@
 import React from "react";
 const paths = {
+  plus: <path d="M12 5v14M5 12h14" />,
+  minus: <path d="M5 12h14" />,
+  frame: (
+    <>
+      <path d="M9 3H3v6M15 3h6v6M3 15v6h6M21 15v6h-6" />
+      <circle cx="12" cy="12" r="3" />
+    </>
+  ),
+  hand: (
+    <>
+      <path d="M8 12V6a2 2 0 0 1 4 0v5-7a2 2 0 0 1 4 0v8-5a2 2 0 0 1 4 0v8c0 4-2 6-6 6h-2c-2 0-3-1-4-3l-4-6a2 2 0 0 1 3-2l2 2" />
+    </>
+  ),
   globe: (
     <>
       <circle cx="12" cy="12" r="9" />

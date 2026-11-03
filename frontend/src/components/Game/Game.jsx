@@ -104,76 +104,119 @@ export default function Game() {
   }
 
   return (
-    <Shell onHelp={() => setDialog("help")}>
-      <section className="intro">
-        <div>
+    <Shell immersive onHelp={() => setDialog("help")}>
+      <section className="atlas-stage" aria-label="Gra w stolice Europy">
+        <div className="atlas-canvas">
+          <MapChart
+            interactive
+            results={answers}
+            currentCountry={current.name}
+          />
+        </div>
+        <div className="atlas-heading">
           <p className="eyebrow">
-            <span className="tiny-line" /> TRENING GEOGRAFICZNY
+            <span className="tiny-line" /> EDYCJA EUROPEJSKA
           </p>
           <h1>
-            Europa na wyciągnięcie <em>myśli.</em>
-          </h1>
-          <p className="intro-description">
-            Znasz kraje. A ich stolice? Sprawdź, ile z nich pamiętasz.
-          </p>
-        </div>
-        <div className="edition">
-          <Icon name="globe" size={28} />
-          <span>
-            EDYCJA EUROPEJSKA
+            Cała Europa.
             <br />
-            <b>45 krajów do odkrycia</b>
+            <em>Z pamięci.</em>
+          </h1>
+          <p>45 krajów. Tyle miejsc do odkrycia.</p>
+        </div>
+        <div className="atlas-stats">
+          <div>
+            <span className="stat-label">
+              <Icon name="check" size={14} /> ODGADNIĘTE
+            </span>
+            <strong>
+              {String(answers.length).padStart(2, "0")}
+              <small> / {countries.length}</small>
+            </strong>
+          </div>
+          <span className="atlas-stat-divider" />
+          <div>
+            <span className="stat-label">
+              <Icon name="clock" size={14} /> CZAS GRY
+            </span>
+            <strong>
+              <Stopwatch seconds={seconds} />
+            </strong>
+          </div>
+          <div
+            className="atlas-progress"
+            role="progressbar"
+            aria-label="Postęp odgadywania stolic"
+            aria-valuenow={answers.length}
+            aria-valuemin={0}
+            aria-valuemax={countries.length}
+          >
+            <span style={{ width: `${progress}%` }} />
+          </div>
+        </div>
+        <button
+          className="atlas-finish"
+          onClick={() => setDialog("finish")}
+          disabled={status !== "playing"}
+        >
+          <Icon name="close" size={15} /> Zakończ rundę
+        </button>
+        <span className="atlas-ocean" aria-hidden="true">
+          O C E A N<br />A T L A N T Y C K I
+        </span>
+        <span className="atlas-sea" aria-hidden="true">
+          M O R Z E &nbsp; Ś R Ó D Z I E M N E
+        </span>
+        <div className="atlas-compass" aria-hidden="true">
+          <span>N</span>
+          <svg width="24" height="38" viewBox="0 0 26 40">
+            <path
+              d="m13 2 10 32-10-6-10 6Z"
+              fill="none"
+              stroke="currentColor"
+            />
+            <path d="m13 2 0 26-10 6Z" fill="currentColor" />
+          </svg>
+        </div>
+        <div className="atlas-legend" aria-label="Legenda mapy">
+          <span>
+            <i className="legend-current" /> Aktualny kraj
+          </span>
+          <span>
+            <i className="legend-correct" /> Odgadnięte
+          </span>
+          <span>
+            <i className="legend-waiting" /> Przed Tobą
           </span>
         </div>
-      </section>
-      <section className="game-layout" aria-label="Gra w stolice Europy">
-        <div className="quiz-column">
-          <div className="stats-panel">
-            <div>
-              <span className="stat-label">
-                <Icon name="check" size={15} /> ODGADNIĘTE
-              </span>
-              <strong>
-                {String(answers.length).padStart(2, "0")}
-                <small> / {countries.length}</small>
-              </strong>
-            </div>
-            <div>
-              <span className="stat-label">
-                <Icon name="clock" size={15} /> CZAS GRY
-              </span>
-              <strong>
-                <Stopwatch seconds={seconds} />
-              </strong>
-            </div>
-          </div>
-          <section className="question-card">
-            <div className="card-top">
-              <span className="round-label">
-                <span
-                  className={
-                    status === "playing" ? "live-dot active" : "live-dot"
-                  }
-                />
-                {status === "playing" ? "RUNDA W TOKU" : "GOTOWY NA WYZWANIE?"}
-              </span>
-              <span className="question-counter">
-                {countries.length - queue.length + 1} / {countries.length}
-              </span>
-            </div>
-            <p className="question-label">Jaką stolicę ma ten kraj?</p>
+        <section
+          className={`atlas-dock ${status === "ready" ? "is-ready" : ""}`}
+          aria-label="Aktualne pytanie"
+        >
+          <div className="atlas-dock-country">
+            <p className="round-label">
+              <span
+                className={
+                  status === "playing" ? "live-dot active" : "live-dot"
+                }
+              />
+              {status === "playing"
+                ? "JAKA JEST STOLICA?"
+                : "GOTOWY NA PODRÓŻ?"}
+            </p>
             <h2 className="country-name">
               <CountryFlag country={current} />
               <span>{current.label}</span>
             </h2>
-            <span className="country-region">
-              <Icon name="pin" size={13} /> Europa
+            <span className="atlas-remaining">
+              <Icon name="pin" size={13} /> Europa <span>·</span> Pozostało{" "}
+              {queue.length}
             </span>
+          </div>
+          <div className="atlas-dock-answer">
             <form onSubmit={(event) => event.preventDefault()}>
               <label htmlFor="capital">Twoja odpowiedź</label>
-              <div
-                className={`input-wrap ${feedback?.correct === false ? "invalid" : ""}`}
-              >
+              <div className="input-wrap">
                 <input
                   ref={input}
                   id="capital"
@@ -185,10 +228,10 @@ export default function Game() {
                   spellCheck="false"
                   autoCapitalize="words"
                   aria-describedby="answer-feedback answer-hint"
-                  aria-invalid={feedback?.correct === false}
-                  onKeyDown={(e) => {
-                    if (e.key === "Escape") {
-                      e.preventDefault();
+                  aria-invalid={false}
+                  onKeyDown={(event) => {
+                    if (event.key === "Escape") {
+                      event.preventDefault();
                       skip();
                     }
                   }}
@@ -198,121 +241,55 @@ export default function Game() {
                 </span>
               </div>
               <p id="answer-hint" className="input-hint">
-                Poprawna odpowiedź zalicza się automatycznie.
+                Po polsku lub angielsku. Zaliczymy automatycznie.
               </p>
               {status === "ready" && (
                 <button
-                  className="button primary submit-button"
+                  className="button primary atlas-start"
                   type="button"
                   onClick={start}
                 >
-                  Zaczynamy <Icon name="arrow" />
+                  Zaczynamy <Icon name="arrow" size={18} />
                 </button>
               )}
             </form>
+          </div>
+          <div className="atlas-dock-bottom">
             <div
               id="answer-feedback"
-              className={`answer-feedback ${feedback?.correct === true ? "success" : feedback?.correct === false ? "error" : ""}`}
+              className={`atlas-feedback ${feedback?.correct ? "success" : ""}`}
               role="status"
             >
               {feedback ? (
                 <>
-                  {feedback.correct === true && <Icon name="check" size={16} />}{" "}
+                  {feedback.correct && <Icon name="check" size={15} />}{" "}
                   {feedback.text}
                 </>
               ) : (
-                "Każda stolica to kolejny krok w podróży."
+                <>
+                  <Icon name="hand" size={14} /> Przeciągaj, przybliżaj,
+                  odkrywaj.
+                </>
               )}
             </div>
-            <div className="card-actions">
-              <button onClick={skip} disabled={status !== "playing"}>
-                <Icon name="skip" size={16} /> Pomiń na razie <kbd>Esc</kbd>
-              </button>
-              <button
-                onClick={() => setDialog("finish")}
-                disabled={status !== "playing"}
-              >
-                Zakończ rundę
-              </button>
-            </div>
-          </section>
-          <div className="progress-card">
-            <div>
-              <span>Twoja podróż przez Europę</span>
-              <strong>{progress}%</strong>
-            </div>
-            <div
-              className="progress-track"
-              role="progressbar"
-              aria-label="Postęp odgadywania stolic"
-              aria-valuenow={answers.length}
-              aria-valuemin={0}
-              aria-valuemax={countries.length}
+            <button
+              className="atlas-skip"
+              onClick={skip}
+              disabled={status !== "playing"}
             >
-              <span style={{ width: `${progress}%` }} />
-            </div>
-            <p>
-              Jeszcze {queue.length}{" "}
-              {queue.length === 1 ? "stolica czeka" : "stolic czeka"} na
-              odkrycie.
-            </p>
-          </div>
-        </div>
-        <section className="map-panel" aria-label="Mapa postępu">
-          <div className="map-header">
-            <span>
-              <Icon name="globe" size={17} /> TWÓJ KIERUNEK: EUROPA
-            </span>
-            <span className="map-badge">45 KRAJÓW</span>
-          </div>
-          <span className="map-ocean">
-            O C E A N &nbsp; A T L A N T Y C K I
-          </span>
-          <div className="map-graphic">
-            <MapChart results={answers} currentCountry={current.name} />
-          </div>
-          <div className="map-compass">
-            <span>N</span>
-            <svg width="26" height="40" viewBox="0 0 26 40" aria-hidden="true">
-              <path
-                d="m13 2 10 32-10-6-10 6Z"
-                fill="none"
-                stroke="currentColor"
-              />
-              <path d="m13 2 0 26-10 6Z" fill="currentColor" />
-            </svg>
-          </div>
-          <div className="map-bottom">
-            <div className="map-caption">
-              <span className="tiny-line" /> Każda odpowiedź zostawia ślad.
-            </div>
-            <div className="map-legend">
-              <span>
-                <i className="legend-current" />
-                Aktualny kraj
-              </span>
-              <span>
-                <i className="legend-correct" />
-                Odgadnięte
-              </span>
-              <span>
-                <i className="legend-waiting" />
-                Przed Tobą
-              </span>
-            </div>
+              <Icon name="skip" size={15} /> Pomiń <kbd>Esc</kbd>
+            </button>
           </div>
         </section>
+        <div className="atlas-map-hint">
+          <Icon name="hand" size={14} />
+          <span>
+            Przeciągnij mapę
+            <br />
+            Przybliż kółkiem lub gestem
+          </span>
+        </div>
       </section>
-      <div className="below-game">
-        <Icon name="info" size={17} />
-        <span>
-          Nie znasz odpowiedzi? Pomiń kraj — wrócisz do niego później.
-        </span>
-        <span className="keyboard-tip">
-          Odpowiedzi zaliczamy automatycznie <span>·</span> <kbd>Esc</kbd> pomiń
-          kraj
-        </span>
-      </div>
       {dialog && (
         <dialog
           ref={dialogRef}
@@ -342,6 +319,11 @@ export default function Game() {
               </p>
               <ol>
                 <li>Kliknij „Zaczynamy”, aby uruchomić czas.</li>
+                <li>
+                  Przeciągaj mapę myszą lub palcem. Przybliżaj kółkiem, gestem
+                  dwóch palców lub przyciskami + i − (od 1 do 4×). Przycisk
+                  widoku Europy przywraca pozycję początkową.
+                </li>
                 <li>
                   Wpisz stolicę po polsku lub angielsku. Poprawna odpowiedź
                   zaliczy się automatycznie — bez Entera. Wielkość liter i znaki

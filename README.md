@@ -39,3 +39,13 @@ Build znajduje się w `frontend/build`. Hosting musi przekierowywać ścieżki a
 Oryginalne API Django pozostaje w `backend/` jako niezależna część projektu; nowy frontend go nie wywołuje. Nie jest wymagane do gry.
 
 Flagi państw są lokalnymi plikami SVG w `frontend/public/flags/`, pochodzącymi z zestawu [flag-icons](https://github.com/lipis/flag-icons) na licencji MIT (kopia licencji w tym katalogu). Pole `code` w danych państwa określa plik flagi.
+
+## Wariant z mapą na pierwszym planie
+
+Branch `design/map-first` zawiera pełnoekranową mapę z panelem odpowiedzi i statystykami na mapie. Dotychczasowy układ znajduje się na `main`.
+
+- Przesuwanie: przeciągnij mapę myszą lub palcem.
+- Powiększenie: kółko myszy, gest dwóch palców lub przyciski **+ / −**, w zakresie **1–4×**.
+- Przycisk **Pokaż całą Europę** przywraca początkowy środek i powiększenie.
+- Po ustawieniu fokusu na mapie można używać strzałek, **+**, **−** oraz **Home**. Skróty mapy nie przechwytują wpisywania odpowiedzi.
+- Przesunięcie mapy jest ograniczone, aby nie oddalić się bez końca od Europy. Zmiana pytania zachowuje wybraną pozycję mapy.

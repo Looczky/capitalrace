@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Icon from "./Icon";
-export default function Shell({ children, onHelp }) {
+export default function Shell({ children, onHelp, immersive = false }) {
   return (
-    <div className="app-shell">
+    <div className={`app-shell${immersive ? " atlas-shell" : ""}`}>
       <header className="site-header">
         <Link to="/" className="brand" aria-label="Capitalrace — strona główna">
           <span className="brand-icon">
@@ -24,13 +24,15 @@ export default function Shell({ children, onHelp }) {
         </nav>
       </header>
       <main>{children}</main>
-      <footer className="site-footer">
-        <span>Małe wyzwanie. Wielka podróż.</span>
-        <span>45 krajów · Jeden kontynent · Twoja wiedza</span>
-        <span>
-          Odkrywaj. Zapamiętuj. Powtarzaj. <Icon name="globe" size={15} />
-        </span>
-      </footer>
+      {!immersive && (
+        <footer className="site-footer">
+          <span>Małe wyzwanie. Wielka podróż.</span>
+          <span>45 krajów · Jeden kontynent · Twoja wiedza</span>
+          <span>
+            Odkrywaj. Zapamiętuj. Powtarzaj. <Icon name="globe" size={15} />
+          </span>
+        </footer>
+      )}
     </div>
   );
 }
