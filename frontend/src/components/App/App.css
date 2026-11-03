@@ -1618,7 +1618,7 @@ kbd {
     height: 6px;
     width: 6px;
   }
-  .atlas-legend > span:last-child {
+  .atlas-legend .legend-pending {
     display: none;
   }
   .atlas-dock {
@@ -1755,4 +1755,37 @@ kbd {
     height: 31px;
     margin-right: 7px;
   }
+}
+
+.capital-marker {
+  pointer-events: none;
+}
+.capital-halo {
+  fill: #f8fcf4;
+  fill-opacity: 0.8;
+}
+.capital-dot {
+  fill: #24566a;
+  stroke: #f8fcf4;
+  stroke-width: 1.5;
+}
+.capital-leader {
+  stroke: #24566a;
+  stroke-width: 1;
+  stroke-opacity: 0.7;
+  fill: none;
+}
+.capital-label {
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  fill: #24566a;
+  stroke: #f8fcf4;
+  stroke-width: 3.5;
+  stroke-linejoin: round;
+  paint-order: stroke fill;
+}
+.atlas-legend .legend-capital {
+  background: #24566a;
+  border-radius: 50%;
 }

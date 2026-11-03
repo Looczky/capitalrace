@@ -8,6 +8,7 @@ import {
 } from "react-simple-maps";
 import countries from "../../data/countries.json";
 import Icon from "../App/Icon";
+import CapitalMarkers from "./CapitalMarkers";
 
 const MIN_ZOOM = 1;
 const MAX_ZOOM = 4;
@@ -201,6 +202,7 @@ export default function MapChart({
             filterZoomEvent={filterZoomEvent}
           >
             {features}
+            <CapitalMarkers results={results} />
           </ZoomableGroup>
         </ComposableMap>
       </div>

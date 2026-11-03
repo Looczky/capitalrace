@@ -185,8 +185,11 @@ export default function Game() {
           <span>
             <i className="legend-correct" /> Odgadnięte
           </span>
-          <span>
+          <span className="legend-pending">
             <i className="legend-waiting" /> Przed Tobą
+          </span>
+          <span>
+            <i className="legend-capital" /> Stolice od 2×
           </span>
         </div>
         <section
@@ -328,6 +331,11 @@ export default function Game() {
                   Wpisz stolicę po polsku lub angielsku. Poprawna odpowiedź
                   zaliczy się automatycznie — bez Entera. Wielkość liter i znaki
                   diakrytyczne nie mają znaczenia.
+                </li>
+                <li>
+                  Po odgadnięciu stolicy przybliż mapę co najmniej do 2×, aby
+                  zobaczyć jej punkt i nazwę. Granatowo-turkusowe oznaczenia
+                  pokazują tylko odgadnięte stolice.
                 </li>
                 <li>
                   Pomiń kraj przyciskiem lub klawiszem Esc. Powróci w tej samej

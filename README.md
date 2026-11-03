@@ -42,10 +42,16 @@ Flagi państw są lokalnymi plikami SVG w `frontend/public/flags/`, pochodzącym
 
 ## Wariant z mapą na pierwszym planie
 
-Branch `design/map-first` zawiera pełnoekranową mapę z panelem odpowiedzi i statystykami na mapie. Dotychczasowy układ znajduje się na `main`.
+Pełnoekranowa mapa z panelem odpowiedzi i statystykami na mapie jest domyślnym designem na `main`. Branch `design/map-first` zachowuje pierwszy wariant tego układu.
 
 - Przesuwanie: przeciągnij mapę myszą lub palcem.
 - Powiększenie: kółko myszy, gest dwóch palców lub przyciski **+ / −**, w zakresie **1–4×**.
 - Przycisk **Pokaż całą Europę** przywraca początkowy środek i powiększenie.
 - Po ustawieniu fokusu na mapie można używać strzałek, **+**, **−** oraz **Home**. Skróty mapy nie przechwytują wpisywania odpowiedzi.
 - Przesunięcie mapy jest ograniczone, aby nie oddalić się bez końca od Europy. Zmiana pytania zachowuje wybraną pozycję mapy.
+
+### Odgadnięte stolice na mapie
+
+Przy powiększeniu **od 2×** pojawiają się granatowo-turkusowe punkty z polskimi nazwami **wyłącznie odgadniętych** stolic. Po oddaleniu poniżej 2× oznaczenia znikają. Punkt i napis zachowują czytelny rozmiar podczas zmiany zoomu; nie są pokazywane dla nieodgadniętych ani pominiętych krajów.
+
+Współrzędne `capitalCoordinates` mają format `[długość geograficzna, szerokość geograficzna]` i pochodzą z [Natural Earth — Populated Places](https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/), z [pliku GeoJSON](https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_10m_populated_places_simple.geojson) (dane public domain).

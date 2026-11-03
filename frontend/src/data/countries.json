@@ -4,314 +4,359 @@
     "label": "Albania",
     "capital": "Tirana",
     "englishCapital": "Tirana",
-    "code": "al"
+    "code": "al",
+    "capitalCoordinates": [19.818883, 41.327541]
   },
   {
     "name": "Andorra",
     "label": "Andora",
     "capital": "Andora",
     "englishCapital": "Andorra la Vella",
-    "code": "ad"
+    "code": "ad",
+    "capitalCoordinates": [1.526594, 42.510753]
   },
   {
     "name": "Austria",
     "label": "Austria",
     "capital": "Wiedeń",
     "englishCapital": "Vienna",
-    "code": "at"
+    "code": "at",
+    "capitalCoordinates": [16.364693, 48.201961]
   },
   {
     "name": "Belarus",
     "label": "Białoruś",
     "capital": "Mińsk",
     "englishCapital": "Minsk",
-    "code": "by"
+    "code": "by",
+    "capitalCoordinates": [27.564681, 53.901923]
   },
   {
     "name": "Belgium",
     "label": "Belgia",
     "capital": "Bruksela",
     "englishCapital": "Brussels",
-    "code": "be"
+    "code": "be",
+    "capitalCoordinates": [4.331371, 50.835263]
   },
   {
     "name": "Bosnia and Herzegovina",
     "label": "Bośnia i Hercegowina",
     "capital": "Sarajewo",
     "englishCapital": "Sarajevo",
-    "code": "ba"
+    "code": "ba",
+    "capitalCoordinates": [18.383002, 43.850022]
   },
   {
     "name": "Bulgaria",
     "label": "Bułgaria",
     "capital": "Sofia",
     "englishCapital": "Sofia",
-    "code": "bg"
+    "code": "bg",
+    "capitalCoordinates": [23.314708, 42.685295]
   },
   {
     "name": "Croatia",
     "label": "Chorwacja",
     "capital": "Zagrzeb",
     "englishCapital": "Zagreb",
-    "code": "hr"
+    "code": "hr",
+    "capitalCoordinates": [15.999995, 45.800007]
   },
   {
     "name": "Cyprus",
     "label": "Cypr",
     "capital": "Nikozja",
     "englishCapital": "Nicosia",
-    "code": "cy"
+    "code": "cy",
+    "capitalCoordinates": [33.366635, 35.166677]
   },
   {
     "name": "Czech Republic",
     "label": "Czechy",
     "capital": "Praga",
     "englishCapital": "Prague",
-    "code": "cz"
+    "code": "cz",
+    "capitalCoordinates": [14.422939, 50.086967]
   },
   {
     "name": "Denmark",
     "label": "Dania",
     "capital": "Kopenhaga",
     "englishCapital": "Copenhagen",
-    "code": "dk"
+    "code": "dk",
+    "capitalCoordinates": [12.56154, 55.68051]
   },
   {
     "name": "Estonia",
     "label": "Estonia",
     "capital": "Tallinn",
     "englishCapital": "Tallinn",
-    "code": "ee"
+    "code": "ee",
+    "capitalCoordinates": [24.728041, 59.433877]
   },
   {
     "name": "Finland",
     "label": "Finlandia",
     "capital": "Helsinki",
     "englishCapital": "Helsinki",
-    "code": "fi"
+    "code": "fi",
+    "capitalCoordinates": [24.932457, 60.163804]
   },
   {
     "name": "France",
     "label": "Francja",
     "capital": "Paryż",
     "englishCapital": "Paris",
-    "code": "fr"
+    "code": "fr",
+    "capitalCoordinates": [2.352992, 48.858092]
   },
   {
     "name": "Germany",
     "label": "Niemcy",
     "capital": "Berlin",
     "englishCapital": "Berlin",
-    "code": "de"
+    "code": "de",
+    "capitalCoordinates": [13.399603, 52.523764]
   },
   {
     "name": "Greece",
     "label": "Grecja",
     "capital": "Ateny",
     "englishCapital": "Athens",
-    "code": "gr"
+    "code": "gr",
+    "capitalCoordinates": [23.731375, 37.985272]
   },
   {
     "name": "Hungary",
     "label": "Węgry",
     "capital": "Budapeszt",
     "englishCapital": "Budapest",
-    "code": "hu"
+    "code": "hu",
+    "capitalCoordinates": [19.081375, 47.501952]
   },
   {
     "name": "Iceland",
     "label": "Islandia",
     "capital": "Reykjavík",
     "englishCapital": "Reykjavik",
-    "code": "is"
+    "code": "is",
+    "capitalCoordinates": [-21.936546, 64.143459]
   },
   {
     "name": "Ireland",
     "label": "Irlandia",
     "capital": "Dublin",
     "englishCapital": "Dublin",
-    "code": "ie"
+    "code": "ie",
+    "capitalCoordinates": [-6.25698, 53.346731]
   },
   {
     "name": "Italy",
     "label": "Włochy",
     "capital": "Rzym",
     "englishCapital": "Rome",
-    "code": "it"
+    "code": "it",
+    "capitalCoordinates": [12.481313, 41.897902]
   },
   {
     "name": "Latvia",
     "label": "Łotwa",
     "capital": "Ryga",
     "englishCapital": "Riga",
-    "code": "lv"
+    "code": "lv",
+    "capitalCoordinates": [24.099965, 56.950024]
   },
   {
     "name": "Liechtenstein",
     "label": "Liechtenstein",
     "capital": "Vaduz",
     "englishCapital": "Vaduz",
-    "code": "li"
+    "code": "li",
+    "capitalCoordinates": [9.51667, 47.133724]
   },
   {
     "name": "Lithuania",
     "label": "Litwa",
     "capital": "Wilno",
     "englishCapital": "Vilnius",
-    "code": "lt"
+    "code": "lt",
+    "capitalCoordinates": [25.316635, 54.683366]
   },
   {
     "name": "Luxembourg",
     "label": "Luksemburg",
     "capital": "Luksemburg",
     "englishCapital": "Luxembourg City",
-    "code": "lu"
+    "code": "lu",
+    "capitalCoordinates": [6.130003, 49.61166]
   },
   {
     "name": "Malta",
     "label": "Malta",
     "capital": "Valletta",
     "englishCapital": "Valletta",
-    "code": "mt"
+    "code": "mt",
+    "capitalCoordinates": [14.514711, 35.899732]
   },
   {
     "name": "Moldova",
     "label": "Mołdawia",
     "capital": "Kiszyniów",
     "englishCapital": "Chisinau",
-    "code": "md"
+    "code": "md",
+    "capitalCoordinates": [28.857711, 47.005024]
   },
   {
     "name": "Monaco",
     "label": "Monako",
     "capital": "Monako",
     "englishCapital": "Monaco",
-    "code": "mc"
+    "code": "mc",
+    "capitalCoordinates": [7.406913, 43.739646]
   },
   {
     "name": "Montenegro",
     "label": "Czarnogóra",
     "capital": "Podgorica",
     "englishCapital": "Podgorica",
-    "code": "me"
+    "code": "me",
+    "capitalCoordinates": [19.266307, 42.465972]
   },
   {
     "name": "Netherlands",
     "label": "Holandia",
     "capital": "Amsterdam",
     "englishCapital": "Amsterdam",
-    "code": "nl"
+    "code": "nl",
+    "capitalCoordinates": [4.914694, 52.351914]
   },
   {
     "name": "North Macedonia",
     "label": "Macedonia Północna",
     "capital": "Skopje",
     "englishCapital": "Skopje",
-    "code": "mk"
+    "code": "mk",
+    "capitalCoordinates": [21.433461, 42.000006]
   },
   {
     "name": "Norway",
     "label": "Norwegia",
     "capital": "Oslo",
     "englishCapital": "Oslo",
-    "code": "no"
+    "code": "no",
+    "capitalCoordinates": [10.748033, 59.918636]
   },
   {
     "name": "Poland",
     "label": "Polska",
     "capital": "Warszawa",
     "englishCapital": "Warsaw",
-    "code": "pl"
+    "code": "pl",
+    "capitalCoordinates": [21.005347, 52.230872]
   },
   {
     "name": "Portugal",
     "label": "Portugalia",
     "capital": "Lizbona",
     "englishCapital": "Lisbon",
-    "code": "pt"
+    "code": "pt",
+    "capitalCoordinates": [-9.146812, 38.724669]
   },
   {
     "name": "Romania",
     "label": "Rumunia",
     "capital": "Bukareszt",
     "englishCapital": "Bucharest",
-    "code": "ro"
+    "code": "ro",
+    "capitalCoordinates": [26.098001, 44.435318]
   },
   {
     "name": "Russia",
     "label": "Rosja",
     "capital": "Moskwa",
     "englishCapital": "Moscow",
-    "code": "ru"
+    "code": "ru",
+    "capitalCoordinates": [37.613577, 55.75411]
   },
   {
     "name": "San Marino",
     "label": "San Marino",
     "capital": "San Marino",
     "englishCapital": "San Marino",
-    "code": "sm"
+    "code": "sm",
+    "capitalCoordinates": [12.44177, 43.936096]
   },
   {
     "name": "Serbia",
     "label": "Serbia",
     "capital": "Belgrad",
     "englishCapital": "Belgrade",
-    "code": "rs"
+    "code": "rs",
+    "capitalCoordinates": [20.466045, 44.820591]
   },
   {
     "name": "Slovakia",
     "label": "Słowacja",
     "capital": "Bratysława",
     "englishCapital": "Bratislava",
-    "code": "sk"
+    "code": "sk",
+    "capitalCoordinates": [17.116981, 48.150018]
   },
   {
     "name": "Slovenia",
     "label": "Słowenia",
     "capital": "Lublana",
     "englishCapital": "Ljubljana",
-    "code": "si"
+    "code": "si",
+    "capitalCoordinates": [14.514969, 46.055288]
   },
   {
     "name": "Spain",
     "label": "Hiszpania",
     "capital": "Madryt",
     "englishCapital": "Madrid",
-    "code": "es"
+    "code": "es",
+    "capitalCoordinates": [-3.685297, 40.401972]
   },
   {
     "name": "Sweden",
     "label": "Szwecja",
     "capital": "Sztokholm",
     "englishCapital": "Stockholm",
-    "code": "se"
+    "code": "se",
+    "capitalCoordinates": [18.0663, 59.324127]
   },
   {
     "name": "Switzerland",
     "label": "Szwajcaria",
     "capital": "Berno",
     "englishCapital": "Bern",
-    "code": "ch"
+    "code": "ch",
+    "capitalCoordinates": [7.466976, 46.916683]
   },
   {
     "name": "Ukraine",
     "label": "Ukraina",
     "capital": "Kijów",
     "englishCapital": "Kyiv",
-    "code": "ua"
+    "code": "ua",
+    "capitalCoordinates": [30.514682, 50.435313]
   },
   {
     "name": "United Kingdom",
     "label": "Wielka Brytania",
     "capital": "Londyn",
     "englishCapital": "London",
-    "code": "gb"
+    "code": "gb",
+    "capitalCoordinates": [-0.118668, 51.501941]
   },
   {
     "name": "Vatican City",
     "label": "Watykan",
     "capital": "Watykan",
     "englishCapital": "Vatican City",
-    "code": "va"
+    "code": "va",
+    "capitalCoordinates": [12.453387, 41.903282]
   }
 ]
