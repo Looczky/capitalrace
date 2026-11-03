@@ -20,6 +20,7 @@ Otwórz http://localhost:3000. Gra korzysta z lokalnego zestawu danych i mapy, w
 - Wpisz stolicę po polsku lub angielsku — poprawna odpowiedź jest zaliczana automatycznie, bez klawisza **Enter**. Wielkość liter, znaki diakrytyczne i spacje na początku lub końcu nie mają znaczenia.
 - **Esc** lub **Pomiń na razie** przenosi kraj na koniec kolejki. Spacje w nazwach stolic działają normalnie.
 - Możesz próbować ponownie bez kary i bez limitu czasu.
+- Czerwony przycisk **Zakończ grę** otwiera potwierdzenie. Wybierz **Gram dalej**, aby wrócić do rundy, albo **Tak, zakończ grę**, aby zobaczyć wynik i pełny atlas odpowiedzi — także bez żadnej poprawnej odpowiedzi.
 - Po odgadnięciu wszystkich stolic albo zakończeniu rundy zobaczysz wynik i pełny atlas odpowiedzi. Wynik jest przechowywany w obrębie bieżącej sesji przeglądarki, również po odświeżeniu strony.
 
 Zestaw zachowuje 45 krajów z oryginalnej gry. Dane i polskie nazwy znajdują się w `frontend/src/data/countries.json`; pole `name` odpowiada nazwom na mapie, `label` jest nazwą wyświetlaną, a `capital` i `englishCapital` są akceptowanymi odpowiedziami. Opcjonalne `aliases` pozwala dodać kolejne warianty.

@@ -87,8 +87,15 @@ test("ending early stores results and results survive page refresh", () => {
   const view = render(<App />);
   start();
   answer("Tirana");
-  fireEvent.click(screen.getByRole("button", { name: "Zakończ rundę" }));
-  fireEvent.click(screen.getByRole("button", { name: /Zobacz wyniki/ }));
+  fireEvent.click(screen.getByRole("button", { name: "Zakończ grę" }));
+  expect(
+    screen.getByRole("dialog", { name: "Na pewno zakończyć grę?" }),
+  ).toBeInTheDocument();
+  fireEvent.click(screen.getByRole("button", { name: "Gram dalej" }));
+  expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+  expect(screen.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "1");
+  fireEvent.click(screen.getByRole("button", { name: "Zakończ grę" }));
+  fireEvent.click(screen.getByRole("button", { name: "Tak, zakończ grę" }));
   expect(screen.getByText("1 / 45")).toBeInTheDocument();
   view.unmount();
   render(<App />);
@@ -141,4 +148,21 @@ test("typing a complete correct answer accepts it once, clears the field and kee
   answer("Andorra la Vella");
   expect(screen.getByRole("heading", { name: "Austria" })).toBeInTheDocument();
   expect(screen.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "2");
+});
+
+test("can end a game with no correct answers after confirmation", () => {
+  render(<App />);
+  start();
+  fireEvent.click(screen.getByRole("button", { name: "Zakończ grę" }));
+  expect(
+    screen.getByRole("dialog", { name: "Na pewno zakończyć grę?" }),
+  ).toBeInTheDocument();
+  expect(
+    screen.queryByRole("heading", { name: "Twój atlas odpowiedzi" }),
+  ).not.toBeInTheDocument();
+  fireEvent.click(screen.getByRole("button", { name: "Tak, zakończ grę" }));
+  expect(screen.getByText("0 / 45")).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: /Do powtórki/ })).toHaveTextContent(
+    "45",
+  );
 });

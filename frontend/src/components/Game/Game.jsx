@@ -154,13 +154,6 @@ export default function Game() {
             <span style={{ width: `${progress}%` }} />
           </div>
         </div>
-        <button
-          className="atlas-finish"
-          onClick={() => setDialog("finish")}
-          disabled={status !== "playing"}
-        >
-          <Icon name="close" size={15} /> Zakończ rundę
-        </button>
         <span className="atlas-ocean" aria-hidden="true">
           O C E A N<br />A T L A N T Y C K I
         </span>
@@ -275,13 +268,22 @@ export default function Game() {
                 </>
               )}
             </div>
-            <button
-              className="atlas-skip"
-              onClick={skip}
-              disabled={status !== "playing"}
-            >
-              <Icon name="skip" size={15} /> Pomiń <kbd>Esc</kbd>
-            </button>
+            <div className="atlas-dock-actions">
+              <button
+                className="atlas-skip"
+                onClick={skip}
+                disabled={status !== "playing"}
+              >
+                <Icon name="skip" size={15} /> Pomiń <kbd>Esc</kbd>
+              </button>
+              <button
+                className="button danger atlas-finish"
+                onClick={() => setDialog("finish")}
+                disabled={status !== "playing"}
+              >
+                <Icon name="close" size={15} /> Zakończ grę
+              </button>
+            </div>
           </div>
         </section>
         <div className="atlas-map-hint">
@@ -355,20 +357,22 @@ export default function Game() {
             </>
           ) : (
             <>
-              <h2 id="dialog-title">Kończymy tę podróż?</h2>
+              <h2 id="dialog-title">Na pewno zakończyć grę?</h2>
               <p>
-                Masz {answers.length} z {countries.length} stolic. Zobaczysz
-                podsumowanie oraz odpowiedzi do powtórki.
+                Odgadnięto {answers.length} z {countries.length} stolic. Po
+                zakończeniu zobaczysz swój wynik oraz wszystkie nieodgadnięte
+                stolice do powtórki.
               </p>
               <div className="modal-actions">
                 <button
                   className="button secondary"
+                  autoFocus
                   onClick={() => setDialog(null)}
                 >
                   Gram dalej
                 </button>
-                <button className="button primary" onClick={() => finish()}>
-                  Zobacz wyniki <Icon name="arrow" />
+                <button className="button danger" onClick={() => finish()}>
+                  Tak, zakończ grę <Icon name="arrow" />
                 </button>
               </div>
             </>
