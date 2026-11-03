@@ -31,3 +31,15 @@ Natural Earth udostępnia dane jako [public domain](https://www.naturalearthdata
 - Palestyna: **Jerozolima Wschodnia** jako deklarowana stolica, z akceptowaną **Ramallah** jako siedzibą administracji. [Palestyńskie ministerstwo spraw zagranicznych](https://www.mofa.pna.ps/en-us/mn/our-position). Izrael ma w zestawie Jerozolimę; w wynikach odnotowano sporny status miasta.
 
 Warianty pełnią funkcję ułatwienia edukacyjnego. Odpowiednie objaśnienia są częścią danych i pojawiają się w wynikach. Przy odgadniętym kraju mapa pokazuje wszystkie akceptowane warianty stolic, nie tylko główny punkt.
+
+## Uzupełnienie: cały świat
+
+Zestaw `world` składa się z 181 państw dotychczasowych regionów i 14 państw Oceanii zapisanych w `oceania.json`: łącznie 195 unikalnych państw. Powiązanie mapy nadal opiera się na Natural Earth; w widoku świata zachowano także geometrię terytoriów zależnych oraz Antarktydy jako kontekst. Terytoria zależne nie zwiększają liczby odpowiedzi, a ich kolorowanie może być powiązane z państwem macierzystym.
+
+Projekcja Equal Earth jest dopasowana do obwiedni całej sfery (`geoPath(geoEqualEarth()).bounds({type: 'Sphere'})`, przy skali 1 i przesunięciu `[0,0]`). Zapobiega to zniekształceniom i ucinaniu mapy na południku zmiany daty, które występowałyby przy zastosowaniu projekcji azymutalnej do całego świata.
+
+- Palau: **Ngerulmud**, zgodnie z [oficjalną stroną spotkania Pacific Islands Forum w Palau](https://55piflm.gov.pw/about). Nie używamy dawnego Koror; lokalizacja Ngerulmud jest podana jawnie, ponieważ starsza warstwa miast zawiera nazwę Melekeok.
+- Kiribati: **Tarawa Południowa / South Tarawa**, z akceptowanymi nazwami Tarawa i Bairiki. [Millennium Challenge Corporation](https://www.mcc.gov/where-we-work/program/kiribati-threshold-program/).
+- Nauru: brak oficjalnej stolicy; **Yaren** jest siedzibą władz i jest akceptowane jako odpowiedź w quizie, obok „brak oficjalnej stolicy”. [UNCTAD](https://dgff2021.unctad.org/wp-content/uploads/pdf/Dgff2021_Cp_520.pdf), [OECD](https://www.oecd.org/content/dam/oecd/en/publications/reports/2019/07/global-forum-on-transparency-and-exchange-of-information-for-tax-purposes-nauru-2019-second-round_3067e2a3/43120c29-en.pdf). Współrzędne Yaren podano jawnie.
+
+Pozostałe punkty stolic Oceanii pochodzą z tej samej warstwy populated places Natural Earth. Dodatkowe flagi mają tę samą licencję flag-icons.

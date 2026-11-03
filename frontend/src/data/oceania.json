@@ -1,0 +1,136 @@
+[
+  {
+    "name": "Australia",
+    "label": "Australia",
+    "capital": "Canberra",
+    "englishCapital": "Canberra",
+    "code": "au",
+    "capitalCoordinates": [149.129026, -35.283029],
+    "mapMarker": false
+  },
+  {
+    "name": "New Zealand",
+    "label": "Nowa Zelandia",
+    "capital": "Wellington",
+    "englishCapital": "Wellington",
+    "code": "nz",
+    "capitalCoordinates": [174.777201, -41.292068],
+    "mapMarker": false
+  },
+  {
+    "name": "Papua New Guinea",
+    "label": "Papua-Nowa Gwinea",
+    "capital": "Port Moresby",
+    "englishCapital": "Port Moresby",
+    "code": "pg",
+    "capitalCoordinates": [147.192504, -9.464708],
+    "mapMarker": false
+  },
+  {
+    "name": "Fiji",
+    "label": "Fidżi",
+    "capital": "Suva",
+    "englishCapital": "Suva",
+    "code": "fj",
+    "capitalCoordinates": [178.441707, -18.133016],
+    "mapMarker": false
+  },
+  {
+    "name": "Solomon Islands",
+    "label": "Wyspy Salomona",
+    "capital": "Honiara",
+    "englishCapital": "Honiara",
+    "code": "sb",
+    "capitalCoordinates": [159.949766, -9.437994],
+    "mapMarker": false
+  },
+  {
+    "name": "Vanuatu",
+    "label": "Vanuatu",
+    "capital": "Port Vila",
+    "englishCapital": "Port Vila",
+    "code": "vu",
+    "capitalCoordinates": [168.316641, -17.73335],
+    "mapMarker": false
+  },
+  {
+    "name": "Samoa",
+    "label": "Samoa",
+    "capital": "Apia",
+    "englishCapital": "Apia",
+    "code": "ws",
+    "capitalCoordinates": [-171.768599, -13.835715],
+    "mapMarker": true
+  },
+  {
+    "name": "Tonga",
+    "label": "Tonga",
+    "capital": "Nuku'alofa",
+    "englishCapital": "Nuku'alofa",
+    "code": "to",
+    "capitalCoordinates": [-175.220564, -21.138512],
+    "mapMarker": true
+  },
+  {
+    "name": "Tuvalu",
+    "label": "Tuvalu",
+    "capital": "Funafuti",
+    "englishCapital": "Funafuti",
+    "code": "tv",
+    "capitalCoordinates": [179.216647, -8.516652],
+    "mapMarker": true
+  },
+  {
+    "name": "Kiribati",
+    "label": "Kiribati",
+    "capital": "Tarawa Południowa",
+    "englishCapital": "South Tarawa",
+    "code": "ki",
+    "capitalCoordinates": [173.017571, 1.338188],
+    "aliases": ["Tarawa", "Bairiki"],
+    "notes": "Tarawa Południowa jest stolicą; siedziby władz leżą m.in. w Bairiki.",
+    "mapMarker": true
+  },
+  {
+    "name": "Marshall Islands",
+    "label": "Wyspy Marshalla",
+    "capital": "Majuro",
+    "englishCapital": "Majuro",
+    "code": "mh",
+    "capitalCoordinates": [171.38, 7.103004],
+    "mapMarker": true
+  },
+  {
+    "name": "Micronesia",
+    "label": "Mikronezja",
+    "capital": "Palikir",
+    "englishCapital": "Palikir",
+    "code": "fm",
+    "capitalCoordinates": [158.149974, 6.916644],
+    "countryAliases": [
+      "Federated States of Micronesia",
+      "Sfederowane Stany Mikronezji"
+    ],
+    "mapMarker": true
+  },
+  {
+    "name": "Palau",
+    "label": "Palau",
+    "capital": "Ngerulmud",
+    "englishCapital": "Ngerulmud",
+    "code": "pw",
+    "capitalCoordinates": [134.6243, 7.5006],
+    "mapMarker": true
+  },
+  {
+    "name": "Nauru",
+    "label": "Nauru",
+    "capital": "Yaren",
+    "englishCapital": "Yaren",
+    "code": "nr",
+    "capitalCoordinates": [166.9209, -0.5477],
+    "aliases": ["brak oficjalnej stolicy", "brak stolicy"],
+    "notes": "Nauru nie ma oficjalnej stolicy. W quizie akceptujemy Yaren — siedzibę władz.",
+    "mapMarker": true
+  }
+]

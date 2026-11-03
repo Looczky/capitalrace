@@ -69,10 +69,11 @@ Wybierz **Państwa** w przełączniku minigier lub otwórz `/countries`. Wpisuj 
 
 ## Regiony w obu minigrach
 
-Wybierz region w nagłówku. Przełącznik **Stolice / Państwa** zachowuje wybrany region. Zmiana regionu rozpoczyna nową rundę wybranej minigry. Wyniki dziesięciu kombinacji regionu i minigry są przechowywane oddzielnie; starsze wyniki Europy pozostają obsługiwane.
+Wybierz region w nagłówku. Przełącznik **Stolice / Państwa** zachowuje wybrany region. Zmiana regionu rozpoczyna nową rundę wybranej minigry. Wyniki dwunastu kombinacji regionu i minigry są przechowywane oddzielnie; starsze wyniki Europy pozostają obsługiwane.
 
 | Region | Liczba państw | Stolice | Państwa |
 | --- | ---: | --- | --- |
+| Cały świat | 195 | `/play/world` | `/play/world/countries` |
 | Europa | 45 | `/` | `/countries` |
 | Azja | 47 | `/play/asia` | `/play/asia/countries` |
 | Afryka | 54 | `/play/africa` | `/play/africa/countries` |
@@ -86,3 +87,11 @@ Dane regionalne znajdują się w `frontend/src/data/`, konfiguracja w `regions.j
 Dla nazw, które są początkiem dłuższej odpowiedzi (np. Niger → Nigeria, Gwinea → Gwinea Bissau, Sana → Sanaa), gra krótko czeka na dokończenie wpisywania. Stolice wielofunkcyjne mają akceptowane warianty i objaśnienia na ekranie wyników; po odgadnięciu kraju w grze w stolice można zobaczyć te miasta na mapie od 2×.
 
 Źródła, szczegóły aktualizacji stolic i zasady danych: [docs/data-sources.md](docs/data-sources.md).
+
+## Cały świat
+
+Opcja **Cały świat** łączy wszystkie zestawy oraz 14 państw Oceanii: Australię, Nową Zelandię, Papuę-Nową Gwineę, Fidżi, Wyspy Salomona, Vanuatu, Samoa, Tongę, Tuvalu, Kiribati, Wyspy Marshalla, Mikronezję, Palau i Nauru. Każde z 195 państw występuje tylko raz.
+
+Mapa świata używa projekcji Equal Earth i dopasowuje całą kulę ziemską do ekranu. Zakres przybliżenia to **1–8×**; wcześniejsze regiony nadal mają zakres 1–4×. Małe państwa mają dodatkowe punkty, a terytoria zależne są tłem lub kolorują się wraz z państwem, do którego należą — nie są oddzielnymi odpowiedziami.
+
+Obie minigry mają odrębne wyniki dla świata. Nauru nie ma oficjalnej stolicy, dlatego quiz akceptuje Yaren (siedzibę władz) oraz odpowiedź „brak oficjalnej stolicy”; wyjaśnienie widnieje w wynikach.

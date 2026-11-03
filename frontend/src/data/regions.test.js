@@ -5,6 +5,7 @@ import { isCorrect, findCountry, isCountryNamePrefix } from "../utils/utils";
 
 test("regional datasets have unique countries, coordinates, flags and matching map features", () => {
   const expected = {
+    world: 195,
     europe: 45,
     asia: 47,
     africa: 54,
@@ -29,7 +30,7 @@ test("regional datasets have unique countries, coordinates, flags and matching m
           )
         : geo.features.map((item) => item.properties.NAME);
     region.countries.forEach((country) => {
-      allCodes.push(country.code);
+      if (region.id !== "world") allCodes.push(country.code);
       expect(names).toContain(country.name);
       expect(
         fs.existsSync(
@@ -57,8 +58,8 @@ test("results and storage keys do not collide across regions or minigames", () =
       paths.push(getResultsPath(region.id, mode));
     }),
   );
-  expect(new Set(keys).size).toBe(10);
-  expect(new Set(paths).size).toBe(10);
+  expect(new Set(keys).size).toBe(Object.keys(REGIONS).length * 2);
+  expect(new Set(paths).size).toBe(Object.keys(REGIONS).length * 2);
 });
 
 test("long country names remain typable despite shorter valid country names", () => {
@@ -95,4 +96,52 @@ test("unknown region names cannot resolve to object prototype properties", () =>
   expect(getRegion("unknown")).toBeUndefined();
   expect(getRegion("constructor")).toBeUndefined();
   expect(getRegion("__proto__")).toBeUndefined();
+});
+
+test("the world includes every regional country exactly once plus fourteen Oceanian countries", () => {
+  const world = REGIONS.world.countries;
+  const regional = Object.values(REGIONS)
+    .filter((region) => region.id !== "world")
+    .flatMap((region) => region.countries);
+  const regionalCodes = new Set(regional.map((country) => country.code));
+  expect(new Set(world.map((country) => country.code)).size).toBe(195);
+  regional.forEach((country) =>
+    expect(world.find((item) => item.code === country.code)?.name).toBe(
+      country.name,
+    ),
+  );
+  expect(
+    world.filter((country) => !regionalCodes.has(country.code)),
+  ).toHaveLength(14);
+  [
+    "au",
+    "nz",
+    "pg",
+    "fj",
+    "sb",
+    "vu",
+    "ws",
+    "to",
+    "tv",
+    "ki",
+    "mh",
+    "fm",
+    "pw",
+    "nr",
+  ].forEach((code) =>
+    expect(world.some((country) => country.code === code)).toBe(true),
+  );
+  expect(REGIONS.world.projection).toBe("geoEqualEarth");
+});
+
+test("Oceanian capital answers support current seats and spelling variants", () => {
+  const byCode = (code) =>
+    REGIONS.world.countries.find((country) => country.code === code);
+  expect(isCorrect("Canberra", byCode("au"))).toBe(true);
+  expect(isCorrect("Ngerulmud", byCode("pw"))).toBe(true);
+  expect(isCorrect("Koror", byCode("pw"))).toBe(false);
+  expect(isCorrect("Nukuʻalofa", byCode("to"))).toBe(true);
+  expect(isCorrect("South Tarawa", byCode("ki"))).toBe(true);
+  expect(isCorrect("Yaren", byCode("nr"))).toBe(true);
+  expect(byCode("nr").notes).toMatch(/nie ma oficjalnej stolicy/);
 });

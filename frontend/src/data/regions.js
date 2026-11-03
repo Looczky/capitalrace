@@ -4,8 +4,39 @@ import asia from "./asia.json";
 import africa from "./africa.json";
 import northAmerica from "./north-america.json";
 import southAmerica from "./south-america.json";
+import oceania from "./oceania.json";
+import worldSmallCountries from "./world-small-countries.json";
+
+const worldCountries = [
+  ...europe,
+  ...asia,
+  ...africa,
+  ...northAmerica,
+  ...southAmerica,
+  ...oceania,
+].map((country) => ({
+  ...country,
+  mapMarker: country.mapMarker || worldSmallCountries.includes(country.code),
+}));
 
 export const REGIONS = {
+  world: {
+    id: "world",
+    label: "Cały świat",
+    genitive: "świata",
+    headline: "Cały świat.",
+    winTitle: "Cały świat jest Twój.",
+    countries: worldCountries,
+    map: "/maps/world.geojson",
+    projection: "geoEqualEarth",
+    layout: layouts.world,
+    center: [0, 0],
+    bounds: [-180, -85, 180, 85],
+    maxZoom: 8,
+    resetLabel: "Pokaż cały świat",
+    scope:
+      "195 państw: wszystkie dotychczasowe zestawy oraz 14 państw Oceanii. Bez powtórzeń i osobnego odgadywania terytoriów zależnych.",
+  },
   europe: {
     id: "europe",
     label: "Europa",

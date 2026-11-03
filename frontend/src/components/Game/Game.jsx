@@ -431,8 +431,9 @@ export default function Game({ mode = "capitals", regionId = "europe" }) {
                 <li>Kliknij „Zaczynamy”, aby uruchomić czas.</li>
                 <li>
                   Przeciągaj mapę myszą lub palcem. Przybliżaj kółkiem, gestem
-                  dwóch palców lub przyciskami + i − (od 1 do 4×). Przycisk
-                  widoku regionu przywraca pozycję początkową.
+                  dwóch palców lub przyciskami + i − (od 1 do{" "}
+                  {region.maxZoom || 4}×). Przycisk widoku regionu przywraca
+                  pozycję początkową.
                 </li>
                 <li>
                   {isCountries

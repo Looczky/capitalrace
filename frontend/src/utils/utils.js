@@ -16,7 +16,7 @@ export function normalize(value) {
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/ł/g, "l")
-    .replace(/[’'.,]/g, "")
+    .replace(/[’'.,ʻʼ]/g, "")
     .replace(/[-‐‑–]/g, " ")
     .replace(/\s+/g, " ");
 }

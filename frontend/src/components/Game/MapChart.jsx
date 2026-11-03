@@ -36,6 +36,7 @@ export default function MapChart({
 }) {
   const region = getRegion(regionId);
   const countries = region.countries;
+  const maxZoom = region.maxZoom || MAX_ZOOM;
   const HOME = region.layout?.cameraCenter || region.center;
   const scaleFor = (width, height) =>
     region.layout
@@ -75,14 +76,14 @@ export default function MapChart({
     (next) =>
       setPosition({
         coordinates: next.coordinates,
-        zoom: Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, next.zoom)),
+        zoom: Math.max(MIN_ZOOM, Math.min(maxZoom, next.zoom)),
       }),
-    [],
+    [maxZoom],
   );
   const zoomBy = (factor) =>
     setPosition((previous) => ({
       ...previous,
-      zoom: Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, previous.zoom * factor)),
+      zoom: Math.max(MIN_ZOOM, Math.min(maxZoom, previous.zoom * factor)),
     }));
   const reset = () => setPosition({ coordinates: HOME, zoom: MIN_ZOOM });
   const pan = (dx, dy) =>
@@ -186,7 +187,7 @@ export default function MapChart({
   if (!interactive)
     return (
       <ComposableMap
-        projection="geoAzimuthalEqualArea"
+        projection={region.projection || "geoAzimuthalEqualArea"}
         projectionConfig={{
           rotate: [-region.center[0], -region.center[1], 0],
           scale: staticScale,
@@ -218,7 +219,7 @@ export default function MapChart({
         onKeyDown={handleKeyDown}
       >
         <ComposableMap
-          projection="geoAzimuthalEqualArea"
+          projection={region.projection || "geoAzimuthalEqualArea"}
           projectionConfig={{
             rotate: [-region.center[0], -region.center[1], 0],
             scale: scaleFor(size.width, size.height),
@@ -236,7 +237,7 @@ export default function MapChart({
             center={position.coordinates}
             zoom={position.zoom}
             minZoom={MIN_ZOOM}
-            maxZoom={MAX_ZOOM}
+            maxZoom={maxZoom}
             translateExtent={[
               [-size.width * 0.35, -size.height * 0.35],
               [size.width * 1.35, size.height * 1.35],
@@ -259,7 +260,7 @@ export default function MapChart({
         <button
           aria-label="Przybliż mapę"
           title="Przybliż (+)"
-          disabled={position.zoom >= MAX_ZOOM - 0.001}
+          disabled={position.zoom >= maxZoom - 0.001}
           onClick={() => zoomBy(1.4)}
         >
           <Icon name="plus" />
@@ -286,8 +287,9 @@ export default function MapChart({
       </div>
       <p id="map-instructions" className="sr-only">
         Przeciągnij mapę, aby ją przesunąć. Przybliżaj kółkiem myszy lub dwoma
-        palcami. Zakres od 1 do 4 razy. Z klawiatury: strzałki przesuwają, plus
-        i minus zmieniają powiększenie, Home przywraca widok regionu.
+        palcami. Zakres od 1 do {maxZoom} razy. Z klawiatury: strzałki
+        przesuwają, plus i minus zmieniają powiększenie, Home przywraca widok
+        regionu.
       </p>
     </div>
   );
